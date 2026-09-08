@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ma sélection — À portée de plume</title>
+<meta name="description" content="Votre sélection de carnets et votre bon de commande À portée de plume.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/png" href="images/logo.png">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body id="top">
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <img src="images/logo.png" alt="À portée de plume" class="brand-logo">
+      À portée de plume
+    </a>
+    <nav class="mainnav">
+      <a href="index.html#atelier">L'atelier</a>
+      <a href="index.html#carnets-observation">Carnets d'observation</a>
+      <a href="index.html#collection">Collection</a>
+      <a href="index.html#commander">Commander</a>
+      <a href="catalogue.html" class="nav-shop">Boutique</a>
+    </nav>
+    <div class="header-actions">
+      <a href="commande.html" class="cart-icon-link" style="border-color:var(--brique);" aria-label="Voir ma sélection">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 4h2l2.2 11.4A2 2 0 0 0 9.2 17H18a2 2 0 0 0 2-1.6L21.5 8H6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="20.5" r="1.4" fill="currentColor"/><circle cx="18" cy="20.5" r="1.4" fill="currentColor"/></svg>
+        <span class="cart-badge" id="cart-badge-header">0</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="label" style="margin-bottom:10px;">Votre sélection</div>
+    <h1>Ma sélection</h1>
+    <p>Ajustez les quantités, choisissez votre mode de livraison, puis générez votre bon de commande au format PDF.</p>
+  </div>
+</section>
+
+<div class="wrap cart-layout">
+
+  <div id="cart-items-container">
+    <!-- Rempli en JavaScript -->
+  </div>
+
+  <aside class="summary">
+    <h2>Récapitulatif</h2>
+    <div class="sub">Rien n'est envoyé automatiquement : vous gardez la main jusqu'au bout.</div>
+
+    <div class="summary-subtotal" id="summary-subtotal-row" style="display:none;">
+      <span>Sous-total</span>
+      <span id="summary-subtotal">0,00 €</span>
+    </div>
+
+    <div class="shipping-fields" id="shipping-fields" style="display:none;">
+      <span class="label">Mode de livraison</span>
+      <label class="ship-option">
+        <input type="radio" name="shipping" value="mondialrelay" checked>
+        <span class="ship-info">
+          <span class="ship-name">Mondial Relay <span class="dest-pill">Point relais</span></span>
+          <span class="ship-detail">Retrait dans le point relais de votre choix</span>
+        </span>
+        <span class="ship-price" id="ship-price-mondialrelay">—</span>
+      </label>
+      <label class="ship-option">
+        <input type="radio" name="shipping" value="colissimo">
+        <span class="ship-info">
+          <span class="ship-name">Colissimo — La Poste <span class="dest-pill">Domicile</span></span>
+          <span class="ship-detail">Livraison directement à votre adresse</span>
+        </span>
+        <span class="ship-price" id="ship-price-colissimo">—</span>
+      </label>
+      <div class="hint" id="shipping-hint">Le tarif est calculé automatiquement selon le contenu de votre commande.</div>
+    </div>
+
+    <div class="delivery-fields" id="delivery-fields" style="display:none;">
+      <span class="label" id="delivery-label">Adresse de livraison</span>
+
+      <div id="home-address-block">
+        <div class="field">
+          <label for="ship-address-line">Adresse (n° et rue) *</label>
+          <input type="text" id="ship-address-line" placeholder="Ex. 12 rue des Tilleuls">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="ship-postal">Code postal *</label>
+            <input type="text" id="ship-postal" placeholder="84000" inputmode="numeric">
+          </div>
+          <div class="field">
+            <label for="ship-city">Ville *</label>
+            <input type="text" id="ship-city" placeholder="Avignon">
+          </div>
+        </div>
+      </div>
+
+      <div id="relay-point-block" style="display:none;">
+        <div class="field">
+          <label for="ship-relay-point">Point relais choisi *</label>
+          <input type="text" id="ship-relay-point" placeholder="Ex. Tabac Presse du Centre, 84000 Avignon">
+          <div class="hint">
+            Trouvez le vôtre sur
+            <a href="https://www.mondialrelay.fr/parcelshops/" target="_blank" rel="noopener" style="color:var(--brique); font-weight:600;">mondialrelay.fr</a>,
+            puis indiquez son nom et sa ville ici.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-total">
+      <span>Total</span>
+      <span id="summary-total">0,00 €</span>
+    </div>
+
+    <div class="buyer-fields">
+      <span class="label">Vos coordonnées</span>
+      <div class="field">
+        <label for="buyer-name">Nom et prénom *</label>
+        <input type="text" id="buyer-name" placeholder="Ex. Athéna Dupont" required>
+      </div>
+      <div class="field">
+        <label for="buyer-email">E-mail *</label>
+        <input type="email" id="buyer-email" placeholder="vous@exemple.fr" required>
+      </div>
+      <div class="field">
+        <label for="buyer-phone">Téléphone</label>
+        <input type="tel" id="buyer-phone" placeholder="06 12 34 56 78">
+        <div class="hint">Facultatif — utile pour les notifications du transporteur (Mondial Relay notamment).</div>
+      </div>
+      <div class="field">
+        <label for="buyer-note">Remarque (livraison, précisions…)</label>
+        <input type="text" id="buyer-note" placeholder="Facultatif">
+        <div class="hint">Ces informations sont ajoutées au PDF et reprises dans le libellé du virement.</div>
+      </div>
+      <label class="check-toggle">
+        <input type="checkbox" id="buyer-video">
+        <span>Préparation de la commande en vidéo</span>
+      </label>
+    </div>
+
+    <button class="btn btn-primary" id="generate-btn" disabled>Générer mon bon de commande (PDF)</button>
+    <div class="form-msg" id="form-msg"></div>
+
+    <div class="next-steps">
+      <b>Et ensuite ?</b>
+      Téléchargez le PDF, puis envoyez-le en pièce jointe à
+      <a href="mailto:aporteedeplume.contact@gmail.com" style="color:var(--brique); font-weight:600;">aporteedeplume.contact@gmail.com</a>.
+    </div>
+
+    <div class="next-steps" style="margin-top:16px; padding-top:16px;">
+      <b>Règlement par virement</b>
+      Le RIB est directement inclus en page 2 de votre bon de commande PDF.
+      <br><br>
+      Merci d'indiquer <strong>votre prénom et nom</strong> dans le libellé du virement, afin que votre commande soit facilement retrouvée.
+      <br><br>
+      La commande est traitée et expédiée <strong>à réception du paiement</strong>.
+    </div>
+  </aside>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="col">
+      <h4>À portée de plume</h4>
+      <p style="max-width:32ch;">Carnets d'observation illustrés, conçus et édités indépendamment.</p>
+    </div>
+    <div class="col">
+      <h4>Navigation</h4>
+      <a href="index.html#atelier">L'atelier</a>
+      <a href="catalogue.html">Boutique</a>
+      <a href="commande.html">Ma sélection</a>
+    </div>
+    <div class="col">
+      <h4>Contact</h4>
+      <a href="mailto:aporteedeplume.contact@gmail.com">aporteedeplume.contact@gmail.com</a>
+      
+      <a href="https://www.instagram.com/a_portee_de_plume" target="_blank" rel="noopener" class="social-link">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg>
+        Instagram
+      </a>
+      <a href="https://www.tiktok.com/@a_portee_de_plume" target="_blank" rel="noopener" class="social-link">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 3c.4 2.4 2 4 4.5 4.2V10c-1.6 0-3.1-.5-4.5-1.4V15a5.5 5.5 0 1 1-5.5-5.5c.3 0 .7 0 1 .1v2.6a2.9 2.9 0 1 0 2 2.8V3h2.5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        TikTok
+      </a>
+      
+    </div>
+  </div>
+</footer>
+
+<div class="legal-band">
+  <div class="wrap">
+    <a href="mentions-legales.html">Mentions légales</a>
+    <a href="cgv.html">Conditions générales de vente</a>
+    <a href="retractation.html">Formulaire de rétractation</a>
+    <a href="confidentialite.html">Politique de confidentialité</a>
+    <a href="cookies.html">Gestion des cookies</a>
+    <a href="#top" class="back-to-top" aria-label="Retour en haut de page">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 15l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</div>
+
+<script src="products.js"></script>
+<script src="icons.js"></script>
+<script src="cart.js"></script>
+<script>
+(function(){
+  const CONTACT_EMAIL = "aporteedeplume.contact@gmail.com";
+
+  // Coordonnées bancaires imprimées en page 2 du bon de commande.
+  const BANK_DETAILS = {
+    titulaire: "Ambre Danel",
+    iban: "FR76 2823 3000 0151 5343 5467 448",
+    bic: "REVOFRP2",
+    banque: "Revolut Bank UAB — 10 avenue Kléber, 75116 Paris"
+  };
+
+  const PACKAGING_WEIGHT_G = 50;
+
+  const SHIPPING_GRIDS = {
+    mondialrelay: {
+      label: "Mondial Relay — Point Relais",
+      tiers: [
+        [250, 4.15], [500, 4.15], [1000, 5.99], [2000, 7.99], [3000, 7.99],
+        [4000, 9.99], [5000, 15.99], [7000, 15.99], [10000, 15.99],
+        [15000, 25.99], [25000, 25.99]
+      ]
+    },
+    colissimo: {
+      label: "Colissimo — La Poste (domicile)",
+      tiers: [
+        [250, 5.49], [500, 7.59], [750, 9.29], [1000, 9.59], [2000, 11.19],
+        [5000, 17.39], [10000, 25.29], [15000, 31.99], [30000, 39.59]
+      ]
+    }
+  };
+
+  const cartContainer = document.getElementById('cart-items-container');
+  const summarySubtotalRow = document.getElementById('summary-subtotal-row');
+  const summarySubtotal = document.getElementById('summary-subtotal');
+  const shippingFields = document.getElementById('shipping-fields');
+  const shippingHint = document.getElementById('shipping-hint');
+  const deliveryFields = document.getElementById('delivery-fields');
+  const deliveryLabel = document.getElementById('delivery-label');
+  const homeAddressBlock = document.getElementById('home-address-block');
+  const relayPointBlock = document.getElementById('relay-point-block');
+  const summaryTotal = document.getElementById('summary-total');
+  const generateBtn = document.getElementById('generate-btn');
+  const formMsg = document.getElementById('form-msg');
+
+  function fmt(n){
+    if(n === null || n === undefined) return 'Prix à venir';
+    return n.toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €';
+  }
+
+  function getTotalWeight(cart){
+    const itemsWeight = cart.reduce((sum, item) => sum + item.weight * item.qty, 0);
+    return itemsWeight + PACKAGING_WEIGHT_G;
+  }
+
+  function getShippingRate(carrierId, totalWeightG){
+    const grid = SHIPPING_GRIDS[carrierId];
+    if(!grid) return null;
+    for(const [maxWeight, price] of grid.tiers){
+      if(totalWeightG <= maxWeight) return { price, overLimit: false };
+    }
+    const lastTier = grid.tiers[grid.tiers.length - 1];
+    return { price: lastTier[1], overLimit: true };
+  }
+
+  function getShipping(cart){
+    const checked = document.querySelector('input[name="shipping"]:checked');
+    if(!checked) return null;
+    const carrierId = checked.value;
+    const grid = SHIPPING_GRIDS[carrierId];
+    const totalWeight = getTotalWeight(cart);
+    const rate = getShippingRate(carrierId, totalWeight);
+    if(!rate) return null;
+    return { id: carrierId, label: grid.label, price: rate.price, overLimit: rate.overLimit, weight: totalWeight };
+  }
+
+  function renderCartItems(){
+    const cart = getCartItems();
+    const rawCart = getCartRaw();
+
+    if(cart.length === 0){
+      cartContainer.innerHTML = `
+        <div class="cart-empty">
+          <p>Votre sélection est vide pour l'instant.</p>
+          <a href="catalogue.html" class="btn btn-primary">Découvrir le catalogue</a>
+        </div>
+      `;
+      return;
+    }
+
+    cartContainer.innerHTML = cart.map(item => {
+      const relatedAddon = item.relatedAddonId ? getProductById(item.relatedAddonId) : null;
+      const addon = (relatedAddon && relatedAddon.available !== false) ? relatedAddon : null;
+      const addonChecked = addon ? !!rawCart[addon.id] : false;
+      return `
+      <div class="cart-item" data-id="${item.id}">
+        <div class="art">${productThumb(item, 60)}</div>
+        <div class="info">
+          <div class="ref">Réf. ${item.ref}</div>
+          <a href="fiche-produit.html?id=${encodeURIComponent(item.id)}"><h3>${item.name}</h3></a>
+          <div class="unit-price">${fmt(item.price)} / unité</div>
+          ${item.relatedTo ? `<div class="compat-note">Compatible avec : ${item.relatedTo.map(rid => (getProductById(rid) || {}).name).filter(Boolean).join(', ')}</div>` : ''}
+        </div>
+        <div class="qty">
+          <button type="button" class="cart-qty-dec" aria-label="Diminuer">–</button>
+          <input type="number" class="cart-qty-input" value="${item.qty}" min="1" max="99">
+          <button type="button" class="cart-qty-inc" aria-label="Augmenter">+</button>
+        </div>
+        <div class="line-total">${fmt(item.price * item.qty)}</div>
+        ${addon ? `
+        <label class="addon-row">
+          <input type="checkbox" class="addon-toggle" data-addon-id="${addon.id}" ${addonChecked ? 'checked' : ''}>
+          <span>Ajouter « ${addon.name} » <strong>(+${fmt(addon.price)})</strong></span>
+        </label>` : ''}
+        <button type="button" class="remove-btn" style="grid-column:1/-1; justify-self:end;">Retirer</button>
+      </div>
+    `;
+    }).join('');
+
+    cartContainer.querySelectorAll('.cart-item').forEach(row => {
+      const id = row.dataset.id;
+      const qtyInput = row.querySelector('.cart-qty-input');
+
+      row.querySelector('.cart-qty-dec').addEventListener('click', () => {
+        const newQty = Math.max(1, parseInt(qtyInput.value || '1', 10) - 1);
+        setCartQty(id, newQty);
+        renderAll();
+      });
+      row.querySelector('.cart-qty-inc').addEventListener('click', () => {
+        const newQty = Math.min(99, parseInt(qtyInput.value || '1', 10) + 1);
+        setCartQty(id, newQty);
+        renderAll();
+      });
+      qtyInput.addEventListener('change', () => {
+        const newQty = Math.max(1, Math.min(99, parseInt(qtyInput.value || '1', 10)));
+        setCartQty(id, newQty);
+        renderAll();
+      });
+      row.querySelector('.remove-btn').addEventListener('click', () => {
+        removeFromCart(id);
+        renderAll();
+      });
+
+      const addonToggle = row.querySelector('.addon-toggle');
+      if(addonToggle){
+        addonToggle.addEventListener('change', () => {
+          const addonId = addonToggle.dataset.addonId;
+          if(addonToggle.checked){
+            addToCart(addonId, 1);
+          } else {
+            removeFromCart(addonId);
+          }
+          renderAll();
+        });
+      }
+    });
+  }
+
+  function updateDeliveryFieldsVisibility(){
+    const checked = document.querySelector('input[name="shipping"]:checked');
+    const carrierId = checked ? checked.value : 'mondialrelay';
+    if(carrierId === 'mondialrelay'){
+      deliveryLabel.textContent = 'Point relais de retrait';
+      homeAddressBlock.style.display = 'none';
+      relayPointBlock.style.display = 'block';
+    } else {
+      deliveryLabel.textContent = 'Adresse de livraison';
+      homeAddressBlock.style.display = 'block';
+      relayPointBlock.style.display = 'none';
+    }
+  }
+
+  function renderSummary(){
+    const cart = getCartItems();
+
+    if(cart.length === 0){
+      summarySubtotalRow.style.display = 'none';
+      shippingFields.style.display = 'none';
+      deliveryFields.style.display = 'none';
+      summaryTotal.textContent = fmt(0);
+      generateBtn.disabled = true;
+      return;
+    }
+    summarySubtotalRow.style.display = 'flex';
+    shippingFields.style.display = 'block';
+    deliveryFields.style.display = 'block';
+    generateBtn.disabled = false;
+    updateDeliveryFieldsVisibility();
+
+    const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    summarySubtotal.textContent = fmt(subtotal);
+
+    const totalWeight = getTotalWeight(cart);
+    let anyOverLimit = false;
+    Object.keys(SHIPPING_GRIDS).forEach(carrierId => {
+      const rate = getShippingRate(carrierId, totalWeight);
+      const el = document.getElementById('ship-price-' + carrierId);
+      if(el && rate){
+        el.textContent = fmt(rate.price) + (rate.overLimit ? ' *' : '');
+        if(rate.overLimit) anyOverLimit = true;
+      }
+    });
+    shippingHint.textContent = anyOverLimit
+      ? "* Poids important : ce montant est une estimation, le tarif définitif vous sera confirmé par mail."
+      : "Le tarif est calculé automatiquement selon le contenu de votre commande.";
+
+    const shipping = getShipping(cart);
+    const shippingCost = shipping ? shipping.price : 0;
+    summaryTotal.textContent = fmt(subtotal + shippingCost);
+  }
+
+  function renderAll(){
+    renderCartItems();
+    renderSummary();
+    updateCartBadges();
+  }
+
+  document.querySelectorAll('input[name="shipping"]').forEach(radio => {
+    radio.addEventListener('change', renderSummary);
+  });
+
+  function showMsg(text, type){
+    formMsg.textContent = text;
+    formMsg.className = 'form-msg ' + type;
+  }
+
+  generateBtn.addEventListener('click', () => {
+    const cart = getCartItems();
+    if(cart.length === 0){
+      showMsg("Votre sélection est vide : ajoutez au moins un carnet depuis le catalogue.", "error");
+      return;
+    }
+
+    const name = document.getElementById('buyer-name').value.trim();
+    const email = document.getElementById('buyer-email').value.trim();
+    const phone = document.getElementById('buyer-phone').value.trim();
+    const note = document.getElementById('buyer-note').value.trim();
+    const wantsVideo = document.getElementById('buyer-video').checked;
+
+    if(!name || !email){
+      showMsg("Merci de renseigner votre nom et votre e-mail : ces informations sont nécessaires pour traiter votre commande.", "error");
+      if(!name) document.getElementById('buyer-name').focus();
+      else document.getElementById('buyer-email').focus();
+      return;
+    }
+
+    const checkedShipping = document.querySelector('input[name="shipping"]:checked');
+    const carrierId = checkedShipping ? checkedShipping.value : 'mondialrelay';
+
+    let deliveryLines = [];
+    if(carrierId === 'mondialrelay'){
+      const relayPoint = document.getElementById('ship-relay-point').value.trim();
+      if(!relayPoint){
+        showMsg("Merci d'indiquer le point relais choisi pour votre livraison.", "error");
+        document.getElementById('ship-relay-point').focus();
+        return;
+      }
+      deliveryLines = ['Point relais : ' + relayPoint];
+    } else {
+      const addressLine = document.getElementById('ship-address-line').value.trim();
+      const postal = document.getElementById('ship-postal').value.trim();
+      const city = document.getElementById('ship-city').value.trim();
+      if(!addressLine || !postal || !city){
+        showMsg("Merci de renseigner votre adresse complète (adresse, code postal, ville) pour la livraison à domicile.", "error");
+        if(!addressLine) document.getElementById('ship-address-line').focus();
+        else if(!postal) document.getElementById('ship-postal').focus();
+        else document.getElementById('ship-city').focus();
+        return;
+      }
+      deliveryLines = [addressLine, postal + ' ' + city];
+    }
+
+    if(typeof window.jspdf === 'undefined'){
+      showMsg("Le générateur de PDF n'a pas pu se charger. Vérifiez votre connexion et réessayez.", "error");
+      return;
+    }
+
+    const buyerLabel = name;
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const margin = 20;
+    let y = 24;
+
+    const orderNumber = 'APDP-' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '-' + Math.floor(Math.random()*900+100);
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(18);
+    doc.text('À portée de plume', margin, y);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(90, 90, 90);
+    doc.text('Carnets d\'observation illustrés', margin, y + 6);
+    doc.setTextColor(20, 20, 20);
+
+    doc.setFontSize(10);
+    doc.text('BON DE COMMANDE', pageWidth - margin, y, { align: 'right' });
+    doc.setTextColor(120,120,120);
+    doc.text('N° ' + orderNumber, pageWidth - margin, y + 6, { align: 'right' });
+    doc.text('Date : ' + new Date().toLocaleDateString('fr-FR'), pageWidth - margin, y + 12, { align: 'right' });
+    doc.setTextColor(20,20,20);
+
+    y += 24;
+    doc.setDrawColor(180,180,180);
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 10;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.text('Coordonnées', margin, y);
+    y += 6;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.text('Nom : ' + name, margin, y); y += 5.5;
+    doc.text('E-mail : ' + email, margin, y); y += 5.5;
+    if(phone){ doc.text('Téléphone : ' + phone, margin, y); y += 5.5; }
+    if(note){ doc.text('Remarque : ' + note, margin, y); y += 5.5; }
+    if(wantsVideo){ doc.text('Préparation de la commande en vidéo : souhaitée', margin, y); y += 5.5; }
+
+    y += 6;
+    doc.setDrawColor(180,180,180);
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 10;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.text('Livraison', margin, y);
+    y += 6;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.text(carrierId === 'mondialrelay' ? 'Mode : Mondial Relay (point relais)' : 'Mode : Colissimo (livraison à domicile)', margin, y);
+    y += 5.5;
+    deliveryLines.forEach(line => {
+      doc.text(line, margin, y);
+      y += 5.5;
+    });
+
+    y += 6;
+    doc.setDrawColor(180,180,180);
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 10;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    doc.text('Article', margin, y);
+    doc.text('Qté', pageWidth - margin - 60, y, { align: 'right' });
+    doc.text('Prix unit.', pageWidth - margin - 30, y, { align: 'right' });
+    doc.text('Sous-total', pageWidth - margin, y, { align: 'right' });
+    y += 3;
+    doc.setDrawColor(20,20,20);
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 7;
+
+    doc.setFont('helvetica', 'normal');
+    let subtotal = 0;
+    cart.forEach(item => {
+      const lineSubtotal = item.price * item.qty;
+      subtotal += lineSubtotal;
+      doc.text(item.name, margin, y);
+      doc.text(String(item.qty), pageWidth - margin - 60, y, { align: 'right' });
+      doc.text(item.price.toFixed(2) + ' €', pageWidth - margin - 30, y, { align: 'right' });
+      doc.text(lineSubtotal.toFixed(2) + ' €', pageWidth - margin, y, { align: 'right' });
+      y += 7;
+    });
+
+    const shipping = getShipping(cart);
+    const shippingCost = shipping ? shipping.price : 0;
+    doc.text('Livraison — ' + (shipping ? shipping.label : ''), margin, y);
+    doc.text(shippingCost.toFixed(2) + ' €', pageWidth - margin, y, { align: 'right' });
+    y += 7;
+    if(shipping && shipping.overLimit){
+      doc.setFont('helvetica', 'italic');
+      doc.setFontSize(8);
+      doc.setTextColor(120,120,120);
+      doc.text('Montant estime, colis lourd : le tarif definitif sera confirme par mail.', margin, y);
+      doc.setTextColor(20,20,20);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      y += 6;
+    }
+
+    const total = subtotal + shippingCost;
+
+    y += 3;
+    doc.setDrawColor(180,180,180);
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 10;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(12);
+    doc.text('Total', pageWidth - margin - 30, y, { align: 'right' });
+    doc.text(total.toFixed(2) + ' €', pageWidth - margin, y, { align: 'right' });
+
+    y += 20;
+    doc.setDrawColor(180,180,180);
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 10;
+
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(9.5);
+    doc.setTextColor(90,90,90);
+    const instructions = 'Pour valider cette commande, envoyez ce PDF par e-mail a ' + CONTACT_EMAIL + ', accompagne de votre adresse de livraison.';
+    const lines = doc.splitTextToSize(instructions, pageWidth - margin*2);
+    doc.text(lines, margin, y);
+    y += lines.length * 5 + 8;
+
+    doc.setDrawColor(180,180,180);
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 10;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(20,20,20);
+    doc.text('Reglement', margin, y);
+    y += 7;
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9.5);
+    doc.setTextColor(70,70,70);
+    const paymentLines = [
+      'Paiement par virement bancaire. Le RIB figure en page 2 de ce document.',
+      'Libelle du virement a indiquer : "' + buyerLabel + '"',
+      'La commande est traitee et expediee a reception du paiement.'
+    ];
+    paymentLines.forEach(line => {
+      const wrapped = doc.splitTextToSize(line, pageWidth - margin*2);
+      doc.text(wrapped, margin, y);
+      y += wrapped.length * 5 + 3;
+    });
+
+    // --- Page 2 : coordonnées bancaires ---
+    doc.addPage();
+    let y2 = 28;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.setTextColor(20,20,20);
+    doc.text('Coordonnées bancaires', margin, y2);
+    y2 += 6;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(90,90,90);
+    doc.text('À utiliser pour le règlement de votre commande N° ' + orderNumber, margin, y2);
+    y2 += 16;
+
+    doc.setDrawColor(180,180,180);
+    doc.line(margin, y2, pageWidth - margin, y2);
+    y2 += 14;
+
+    const ribRows = [
+      ['Titulaire du compte', BANK_DETAILS.titulaire],
+      ['IBAN', BANK_DETAILS.iban],
+      ['BIC / SWIFT', BANK_DETAILS.bic],
+      ['Banque', BANK_DETAILS.banque]
+    ];
+    ribRows.forEach(([label, value]) => {
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(90,90,90);
+      doc.text(label.toUpperCase(), margin, y2);
+      y2 += 6;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(13);
+      doc.setTextColor(20,20,20);
+      doc.text(value, margin, y2);
+      y2 += 14;
+    });
+
+    doc.setDrawColor(180,180,180);
+    doc.line(margin, y2, pageWidth - margin, y2);
+    y2 += 14;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    doc.setTextColor(20,20,20);
+    doc.text('Libellé du virement à indiquer', margin, y2);
+    y2 += 8;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(13);
+    doc.setTextColor(156,74,50); // brique
+    doc.text('"' + buyerLabel + '"', margin, y2);
+    y2 += 14;
+
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(9);
+    doc.setTextColor(120,120,120);
+    const ribNote = 'Ce libellé permet de retrouver facilement votre commande à réception du virement. La commande est traitée et expédiée dès réception du paiement.';
+    const ribNoteLines = doc.splitTextToSize(ribNote, pageWidth - margin*2);
+    doc.text(ribNoteLines, margin, y2);
+
+    doc.save('bon-de-commande-' + orderNumber + '.pdf');
+    showMsg("Votre bon de commande a été téléchargé. Il ne reste plus qu'à l'envoyer par e-mail à " + CONTACT_EMAIL + ".", "success");
+  });
+
+  renderAll();
+})();
+</script>
+
+</body>
+</html>
