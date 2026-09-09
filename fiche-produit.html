@@ -181,11 +181,21 @@
       `;
 
   const hasImages = product.images && product.images.length > 0;
+  const hasMultiple = hasImages && product.images.length > 1;
   const mainImageHtml = hasImages
     ? `<img src="${product.images[0]}" alt="${product.name}">`
     : iconSvg(product.icon, 200);
 
-  const thumbsHtml = (hasImages && product.images.length > 1)
+  const arrowsHtml = hasMultiple
+    ? `<button type="button" class="gallery-arrow gallery-arrow-prev" aria-label="Photo précédente">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button type="button" class="gallery-arrow gallery-arrow-next" aria-label="Photo suivante">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>`
+    : '';
+
+  const thumbsHtml = hasMultiple
     ? `<div class="gallery-thumbs">
         ${product.images.map((src, i) => `
           <button type="button" class="gallery-thumb${i === 0 ? ' active' : ''}" data-src="${src}" aria-label="Photo ${i + 1}">
@@ -200,6 +210,7 @@
       <div class="detail-gallery">
         <div class="detail-plate${hasImages ? ' has-photo' : ''}">
           <div class="gallery-main-content" id="gallery-main-content">${mainImageHtml}</div>
+          ${arrowsHtml}
         </div>
         ${thumbsHtml}
       </div>
@@ -219,15 +230,22 @@
     </div>
   `;
 
-  if(hasImages && product.images.length > 1){
+  if(hasMultiple){
     const mainContent = document.getElementById('gallery-main-content');
-    document.querySelectorAll('.gallery-thumb').forEach(thumb => {
-      thumb.addEventListener('click', () => {
-        mainContent.innerHTML = `<img src="${thumb.dataset.src}" alt="${product.name}">`;
-        document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
-        thumb.classList.add('active');
-      });
+    const thumbs = Array.from(document.querySelectorAll('.gallery-thumb'));
+    let currentIndex = 0;
+
+    function showImage(index){
+      currentIndex = (index + product.images.length) % product.images.length;
+      mainContent.innerHTML = `<img src="${product.images[currentIndex]}" alt="${product.name}">`;
+      thumbs.forEach((t, i) => t.classList.toggle('active', i === currentIndex));
+    }
+
+    thumbs.forEach((thumb, i) => {
+      thumb.addEventListener('click', () => showImage(i));
     });
+    document.querySelector('.gallery-arrow-prev').addEventListener('click', () => showImage(currentIndex - 1));
+    document.querySelector('.gallery-arrow-next').addEventListener('click', () => showImage(currentIndex + 1));
   }
 
   if(product.available === false) return;

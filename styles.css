@@ -216,6 +216,17 @@ section{padding:88px 0;}
 .gallery-main-content{width:100%; height:100%; display:flex; align-items:center; justify-content:center;}
 .gallery-main-content img{max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block;}
 .gallery-thumbs{display:flex; gap:10px; flex-wrap:wrap;}
+.gallery-arrow{
+  position:absolute; top:50%; transform:translateY(-50%); z-index:3;
+  width:38px; height:38px; border-radius:50%; border:1px solid var(--line);
+  background:rgba(240,236,223,0.92); color:var(--ink); cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 2px 8px rgba(35,52,43,0.15); transition:background .15s ease, border-color .15s ease;
+}
+.gallery-arrow svg{width:18px; height:18px;}
+.gallery-arrow:hover{background:var(--brique); border-color:var(--brique); color:var(--paper);}
+.gallery-arrow-prev{left:12px;}
+.gallery-arrow-next{right:12px;}
 .gallery-thumb{
   width:64px; height:64px; padding:0; border:1px solid var(--line); background:var(--paper);
   cursor:pointer; overflow:hidden; transition:border-color .15s ease;
