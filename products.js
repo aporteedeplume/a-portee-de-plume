@@ -271,11 +271,13 @@ const PRODUCTS = [
     shortDesc: "Un complément pensé pour personnaliser facilement votre carnet d'observation.",
     longDesc: [
       "Ce lot rassemble des illustrations à colorier correspondant aux 20 espèces présentes dans le carnet Mon carnet d'observation d'oiseaux : 20 espèces de France.",
-      "Une fois coloriées, les illustrations peuvent être replacées sur la page de l'espèce correspondante. Elles offrent une alternative simple à ceux qui ne peuvent pas dessiner eux-mêmes ou imprimer des photographies."
+      "Une fois coloriées, les illustrations peuvent être replacées sur la page de l'espèce correspondante. Elles offrent une alternative simple à ceux qui ne peuvent pas dessiner eux-mêmes ou imprimer des photographies.",
+      "Les illustrations sont imprimées sur du papier autocollant, prêtes à être collées une fois coloriées. Un petit guide d'identification accompagne le lot, pour reconnaître plus facilement chaque espèce représentée."
     ],
     specs: [
       ["Compatibilité", "Mon carnet d'observation d'oiseaux : 20 espèces de France"],
-      ["Contenu", "20 illustrations à colorier"]
+      ["Contenu", "20 illustrations à colorier"],
+      ["Support", "papier autocollant"]
     ],
     icon: "pencil",
     relatedTo: ["coo1"]
@@ -292,11 +294,13 @@ const PRODUCTS = [
     shortDesc: "Un complément pensé pour personnaliser facilement votre carnet d'observation.",
     longDesc: [
       "Ce lot rassemble des illustrations à colorier correspondant aux 30 espèces présentes dans le carnet Mon carnet d'observation d'oiseaux : 30 espèces de France.",
-      "Une fois coloriées, les illustrations peuvent être replacées sur la page de l'espèce correspondante. Elles offrent une alternative simple à ceux qui ne peuvent pas dessiner eux-mêmes ou imprimer des photographies."
+      "Une fois coloriées, les illustrations peuvent être replacées sur la page de l'espèce correspondante. Elles offrent une alternative simple à ceux qui ne peuvent pas dessiner eux-mêmes ou imprimer des photographies.",
+      "Les illustrations sont imprimées sur du papier autocollant, prêtes à être collées une fois coloriées. Un petit guide d'identification accompagne le lot, pour reconnaître plus facilement chaque espèce représentée."
     ],
     specs: [
       ["Compatibilité", "Mon carnet d'observation d'oiseaux : 30 espèces de France"],
-      ["Contenu", "30 illustrations à colorier"]
+      ["Contenu", "30 illustrations à colorier"],
+      ["Support", "papier autocollant"]
     ],
     icon: "pencil",
     relatedTo: ["coo2"]
@@ -313,11 +317,13 @@ const PRODUCTS = [
     shortDesc: "Un complément pensé pour personnaliser facilement votre carnet d'observation.",
     longDesc: [
       "Ce lot rassemble des illustrations à colorier correspondant aux 50 espèces présentes dans le carnet Mon carnet d'observation d'oiseaux : 50 espèces de France.",
-      "Une fois coloriées, les illustrations peuvent être replacées sur la page de l'espèce correspondante. Elles offrent une alternative simple à ceux qui ne peuvent pas dessiner eux-mêmes ou imprimer des photographies."
+      "Une fois coloriées, les illustrations peuvent être replacées sur la page de l'espèce correspondante. Elles offrent une alternative simple à ceux qui ne peuvent pas dessiner eux-mêmes ou imprimer des photographies.",
+      "Les illustrations sont imprimées sur du papier autocollant, prêtes à être collées une fois coloriées. Un petit guide d'identification accompagne le lot, pour reconnaître plus facilement chaque espèce représentée."
     ],
     specs: [
       ["Compatibilité", "Mon carnet d'observation d'oiseaux : 50 espèces de France"],
-      ["Contenu", "50 illustrations à colorier"]
+      ["Contenu", "50 illustrations à colorier"],
+      ["Support", "papier autocollant"]
     ],
     icon: "pencil",
     relatedTo: ["coo3"]
@@ -334,11 +340,13 @@ const PRODUCTS = [
     shortDesc: "Un complément pensé pour personnaliser facilement votre carnet d'observation.",
     longDesc: [
       "Ce lot rassemble des illustrations à colorier correspondant aux 50 espèces présentes dans le carnet Mon carnet d'observation d'oiseaux : 50 espèces de France, tome 2.",
-      "Une fois coloriées, les illustrations peuvent être replacées sur la page de l'espèce correspondante. Elles offrent une alternative simple à ceux qui ne peuvent pas dessiner eux-mêmes ou imprimer des photographies."
+      "Une fois coloriées, les illustrations peuvent être replacées sur la page de l'espèce correspondante. Elles offrent une alternative simple à ceux qui ne peuvent pas dessiner eux-mêmes ou imprimer des photographies.",
+      "Les illustrations sont imprimées sur du papier autocollant, prêtes à être collées une fois coloriées. Un petit guide d'identification accompagne le lot, pour reconnaître plus facilement chaque espèce représentée."
     ],
     specs: [
       ["Compatibilité", "Mon carnet d'observation d'oiseaux : 50 espèces de France, tome 2"],
-      ["Contenu", "50 illustrations à colorier"]
+      ["Contenu", "50 illustrations à colorier"],
+      ["Support", "papier autocollant"]
     ],
     icon: "pencil",
     relatedTo: ["coo4"]
@@ -355,11 +363,13 @@ const PRODUCTS = [
     shortDesc: "Un complément pensé pour personnaliser facilement votre carnet d'observation.",
     longDesc: [
       "Ce lot rassemble des illustrations à colorier correspondant aux 81 espèces présentes dans le carnet Mon carnet d'observation d'oiseaux : Les oiseaux de Camargue.",
-      "Une fois coloriées, les illustrations peuvent être replacées sur la page de l'espèce correspondante. Elles offrent une alternative simple à ceux qui ne peuvent pas dessiner eux-mêmes ou imprimer des photographies."
+      "Une fois coloriées, les illustrations peuvent être replacées sur la page de l'espèce correspondante. Elles offrent une alternative simple à ceux qui ne peuvent pas dessiner eux-mêmes ou imprimer des photographies.",
+      "Les illustrations sont imprimées sur du papier autocollant, prêtes à être collées une fois coloriées. Un petit guide d'identification accompagne le lot, pour reconnaître plus facilement chaque espèce représentée."
     ],
     specs: [
       ["Compatibilité", "Mon carnet d'observation d'oiseaux : Les oiseaux de Camargue"],
-      ["Contenu", "81 illustrations à colorier"]
+      ["Contenu", "81 illustrations à colorier"],
+      ["Support", "papier autocollant"]
     ],
     icon: "pencil",
     relatedTo: ["coo5"]
@@ -376,11 +386,13 @@ const PRODUCTS = [
     shortDesc: "Un complément pensé pour personnaliser facilement votre carnet d'observation.",
     longDesc: [
       "Ce lot rassemble des illustrations à colorier correspondant aux 30 espèces présentes dans le carnet Mon carnet d'observation d'oiseaux : 30 espèces de Camargue.",
-      "Une fois coloriées, les illustrations peuvent être replacées sur la page de l'espèce correspondante. Elles offrent une alternative simple à ceux qui ne peuvent pas dessiner eux-mêmes ou imprimer des photographies."
+      "Une fois coloriées, les illustrations peuvent être replacées sur la page de l'espèce correspondante. Elles offrent une alternative simple à ceux qui ne peuvent pas dessiner eux-mêmes ou imprimer des photographies.",
+      "Les illustrations sont imprimées sur du papier autocollant, prêtes à être collées une fois coloriées. Un petit guide d'identification accompagne le lot, pour reconnaître plus facilement chaque espèce représentée."
     ],
     specs: [
       ["Compatibilité", "Mon carnet d'observation d'oiseaux : 30 espèces de Camargue"],
-      ["Contenu", "30 illustrations à colorier"]
+      ["Contenu", "30 illustrations à colorier"],
+      ["Support", "papier autocollant"]
     ],
     icon: "pencil",
     relatedTo: ["coo6"]
@@ -392,8 +404,8 @@ const PRODUCTS = [
     category: "stickers",
     theme: "oiseaux",
     price: 1,
-    weight: null,
-    available: false,
+    weight: 5,
+    available: true,
     shortDesc: "Un petit lot coloré pour décorer carnets, agendas, lettres et créations.",
     longDesc: [
       "Ce lot contient 10 autocollants représentant différents oiseaux, à utiliser selon vos envies pour personnaliser vos supports du quotidien.",
@@ -412,8 +424,8 @@ const PRODUCTS = [
     category: "stickers",
     theme: "insectes",
     price: 1,
-    weight: null,
-    available: false,
+    weight: 5,
+    available: true,
     shortDesc: "Un petit lot coloré pour décorer carnets, agendas, lettres et créations.",
     longDesc: [
       "Ce lot contient 10 autocollants représentant différents insectes, à utiliser selon vos envies pour personnaliser vos supports du quotidien.",

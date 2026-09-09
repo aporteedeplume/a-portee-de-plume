@@ -77,6 +77,14 @@
         </span>
         <span class="ship-price" id="ship-price-colissimo">—</span>
       </label>
+      <label class="ship-option">
+        <input type="radio" name="shipping" value="pickup">
+        <span class="ship-info">
+          <span class="ship-name">Retrait en main propre <span class="dest-pill">Gratuit</span></span>
+          <span class="ship-detail">Remise directe, sans transporteur — pratique si vous êtes dans le coin</span>
+        </span>
+        <span class="ship-price" id="ship-price-pickup">Gratuit</span>
+      </label>
       <div class="hint" id="shipping-hint">Le tarif est calculé automatiquement selon le contenu de votre commande.</div>
     </div>
 
@@ -214,6 +222,23 @@
 (function(){
   const CONTACT_EMAIL = "aporteedeplume.contact@gmail.com";
 
+  // Précharge le logo une seule fois, converti en base64, pour pouvoir l'insérer dans le PDF.
+  let logoDataUrlPromise = null;
+  function loadLogoDataUrl(){
+    if(!logoDataUrlPromise){
+      logoDataUrlPromise = fetch('images/logo.png')
+        .then(res => res.blob())
+        .then(blob => new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        }))
+        .catch(() => null);
+    }
+    return logoDataUrlPromise;
+  }
+
   // Coordonnées bancaires imprimées en page 2 du bon de commande.
   const BANK_DETAILS = {
     titulaire: "Ambre Danel",
@@ -265,25 +290,30 @@
     return itemsWeight + PACKAGING_WEIGHT_G;
   }
 
+  // Surtaxe ajoutée à chaque tarif de livraison, pour couvrir l'emballage et les frais liés
+  // (ex. cotisations URSSAF sur les frais de port encaissés). Ajustez cette valeur si besoin.
+  const PACKAGING_SURCHARGE = 1;
+
   function getShippingRate(carrierId, totalWeightG){
+    if(carrierId === 'pickup') return { price: 0, overLimit: false };
     const grid = SHIPPING_GRIDS[carrierId];
     if(!grid) return null;
     for(const [maxWeight, price] of grid.tiers){
-      if(totalWeightG <= maxWeight) return { price, overLimit: false };
+      if(totalWeightG <= maxWeight) return { price: price + PACKAGING_SURCHARGE, overLimit: false };
     }
     const lastTier = grid.tiers[grid.tiers.length - 1];
-    return { price: lastTier[1], overLimit: true };
+    return { price: lastTier[1] + PACKAGING_SURCHARGE, overLimit: true };
   }
 
   function getShipping(cart){
     const checked = document.querySelector('input[name="shipping"]:checked');
     if(!checked) return null;
     const carrierId = checked.value;
-    const grid = SHIPPING_GRIDS[carrierId];
+    const label = carrierId === 'pickup' ? 'Retrait en main propre' : SHIPPING_GRIDS[carrierId].label;
     const totalWeight = getTotalWeight(cart);
     const rate = getShippingRate(carrierId, totalWeight);
     if(!rate) return null;
-    return { id: carrierId, label: grid.label, price: rate.price, overLimit: rate.overLimit, weight: totalWeight };
+    return { id: carrierId, label, price: rate.price, overLimit: rate.overLimit, weight: totalWeight };
   }
 
   function renderCartItems(){
@@ -371,14 +401,18 @@
   function updateDeliveryFieldsVisibility(){
     const checked = document.querySelector('input[name="shipping"]:checked');
     const carrierId = checked ? checked.value : 'mondialrelay';
+    homeAddressBlock.style.display = 'none';
+    relayPointBlock.style.display = 'none';
     if(carrierId === 'mondialrelay'){
+      deliveryFields.style.display = 'block';
       deliveryLabel.textContent = 'Point relais de retrait';
-      homeAddressBlock.style.display = 'none';
       relayPointBlock.style.display = 'block';
+    } else if(carrierId === 'pickup'){
+      deliveryFields.style.display = 'none';
     } else {
+      deliveryFields.style.display = 'block';
       deliveryLabel.textContent = 'Adresse de livraison';
       homeAddressBlock.style.display = 'block';
-      relayPointBlock.style.display = 'none';
     }
   }
 
@@ -436,7 +470,7 @@
     formMsg.className = 'form-msg ' + type;
   }
 
-  generateBtn.addEventListener('click', () => {
+  generateBtn.addEventListener('click', async () => {
     const cart = getCartItems();
     if(cart.length === 0){
       showMsg("Votre sélection est vide : ajoutez au moins un carnet depuis le catalogue.", "error");
@@ -468,6 +502,8 @@
         return;
       }
       deliveryLines = ['Point relais : ' + relayPoint];
+    } else if(carrierId === 'pickup'){
+      deliveryLines = ['Lieu et horaire à convenir par e-mail'];
     } else {
       const addressLine = document.getElementById('ship-address-line').value.trim();
       const postal = document.getElementById('ship-postal').value.trim();
@@ -497,13 +533,20 @@
 
     const orderNumber = 'APDP-' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '-' + Math.floor(Math.random()*900+100);
 
+    const logoDataUrl = await loadLogoDataUrl();
+    const logoSize = 14;
+    const textX = logoDataUrl ? margin + logoSize + 4 : margin;
+    if(logoDataUrl){
+      try { doc.addImage(logoDataUrl, 'PNG', margin, y - 9, logoSize, logoSize); } catch(e) { /* logo indisponible, on continue sans */ }
+    }
+
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(18);
-    doc.text('À portée de plume', margin, y);
+    doc.text('À portée de plume', textX, y);
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(10);
     doc.setTextColor(90, 90, 90);
-    doc.text('Carnets d\'observation illustrés', margin, y + 6);
+    doc.text('Carnets d\'observation illustrés', textX, y + 6);
     doc.setTextColor(20, 20, 20);
 
     doc.setFontSize(10);
@@ -541,7 +584,12 @@
     y += 6;
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(10);
-    doc.text(carrierId === 'mondialrelay' ? 'Mode : Mondial Relay (point relais)' : 'Mode : Colissimo (livraison à domicile)', margin, y);
+    doc.text(
+      carrierId === 'mondialrelay' ? 'Mode : Mondial Relay (point relais)'
+      : carrierId === 'pickup' ? 'Mode : Retrait en main propre'
+      : 'Mode : Colissimo (livraison à domicile)',
+      margin, y
+    );
     y += 5.5;
     deliveryLines.forEach(line => {
       doc.text(line, margin, y);
@@ -565,15 +613,17 @@
     y += 7;
 
     doc.setFont('helvetica', 'normal');
+    const nameColWidth = (pageWidth - margin - 60) - margin - 4;
     let subtotal = 0;
     cart.forEach(item => {
       const lineSubtotal = item.price * item.qty;
       subtotal += lineSubtotal;
-      doc.text(item.name, margin, y);
+      const nameLines = doc.splitTextToSize(item.name, nameColWidth);
+      doc.text(nameLines, margin, y);
       doc.text(String(item.qty), pageWidth - margin - 60, y, { align: 'right' });
       doc.text(item.price.toFixed(2) + ' €', pageWidth - margin - 30, y, { align: 'right' });
       doc.text(lineSubtotal.toFixed(2) + ' €', pageWidth - margin, y, { align: 'right' });
-      y += 7;
+      y += nameLines.length * 5 + 2;
     });
 
     const shipping = getShipping(cart);
@@ -585,7 +635,7 @@
       doc.setFont('helvetica', 'italic');
       doc.setFontSize(8);
       doc.setTextColor(120,120,120);
-      doc.text('Montant estime, colis lourd : le tarif definitif sera confirme par mail.', margin, y);
+      doc.text('Montant estimé, colis lourd : le tarif définitif sera confirmé par mail.', margin, y);
       doc.setTextColor(20,20,20);
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(10);
@@ -612,7 +662,7 @@
     doc.setFont('helvetica', 'italic');
     doc.setFontSize(9.5);
     doc.setTextColor(90,90,90);
-    const instructions = 'Pour valider cette commande, envoyez ce PDF par e-mail a ' + CONTACT_EMAIL + ', accompagne de votre adresse de livraison.';
+    const instructions = 'Pour valider cette commande, envoyez ce PDF par e-mail à ' + CONTACT_EMAIL + ', accompagné de votre adresse de livraison.';
     const lines = doc.splitTextToSize(instructions, pageWidth - margin*2);
     doc.text(lines, margin, y);
     y += lines.length * 5 + 8;
@@ -624,7 +674,7 @@
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(11);
     doc.setTextColor(20,20,20);
-    doc.text('Reglement', margin, y);
+    doc.text('Règlement', margin, y);
     y += 7;
 
     doc.setFont('helvetica', 'normal');
@@ -632,8 +682,8 @@
     doc.setTextColor(70,70,70);
     const paymentLines = [
       'Paiement par virement bancaire. Le RIB figure en page 2 de ce document.',
-      'Libelle du virement a indiquer : "' + buyerLabel + '"',
-      'La commande est traitee et expediee a reception du paiement.'
+      'Libellé du virement à indiquer : "' + buyerLabel + '"',
+      'La commande est traitée et expédiée à réception du paiement.'
     ];
     paymentLines.forEach(line => {
       const wrapped = doc.splitTextToSize(line, pageWidth - margin*2);
