@@ -403,6 +403,7 @@ const PRODUCTS = [
     name: "10 autocollants d'oiseaux",
     category: "stickers",
     theme: "oiseaux",
+    images: ["images/auo1-a.jpg", "images/auo1-b.jpg", "images/auo1-c.jpg"],
     price: 1,
     weight: 5,
     available: true,
