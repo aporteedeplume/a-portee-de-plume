@@ -39,7 +39,7 @@
 const PRODUCTS = [
   {
     id: "coo1",
-    images: ["images/coo1-a.png", "images/coo1-b.jpg", "images/coo1-c.jpg", "images/coo1-d.jpg", "images/coo1-e.jpg", "images/coo1-f.jpg", "images/coo1-g.jpg"],
+    images: ["images/coo1-a.png", "images/coo1-b.jpg", "images/coo1-c.jpg", "images/coo1-d.jpg", "images/coo1-e.jpg", "images/coo1-f.jpg", "images/coo1-g.jpg", "images/coo1-h.jpg", "images/coo1-i.jpg"],
     ref: "COO1",
     name: "Mon carnet d'observation d'oiseaux : 20 espèces de France",
     category: "carnets-observation",
@@ -265,6 +265,7 @@ const PRODUCTS = [
     name: "Illustrations à colorier – Carnet « Mon carnet d'observation d'oiseaux : 20 espèces de France »",
     category: "colorier",
     theme: "oiseaux",
+    images: ["images/icoo1-a.jpg", "images/icoo1-b.jpg", "images/icoo1-c.jpg"],
     price: 3,
     weight: 35,
     available: true,
