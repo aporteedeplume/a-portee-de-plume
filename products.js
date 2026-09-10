@@ -424,6 +424,7 @@ const PRODUCTS = [
     name: "10 autocollants d'insectes",
     category: "stickers",
     theme: "insectes",
+    images: ["images/aui1-a.jpg", "images/aui1-b.jpg", "images/aui1-c.jpg"],
     price: 1,
     weight: 5,
     available: true,
