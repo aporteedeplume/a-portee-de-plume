@@ -166,8 +166,12 @@
 
   const speciesLine = product.speciesCount ? `<div class="spec-line" style="font-size:.82rem; margin-bottom:8px;">${product.speciesCount} espèces présentées</div>` : '';
 
+  const unavailMessage = product.availabilityLabel === 'Rupture de stock'
+    ? 'Cet article est temporairement en rupture de stock. Revenez bientôt !'
+    : 'Cet article arrive prochainement. Revenez bientôt, ou suivez nos réseaux pour être prévenu·e de sa sortie.';
+
   const actionsBlock = product.available === false
-    ? `<div class="detail-msg" style="display:block; margin-top:4px; color:var(--ink-soft);">Cet article arrive prochainement. Revenez bientôt, ou suivez nos réseaux pour être prévenu·e de sa sortie.</div>`
+    ? `<div class="detail-msg" style="display:block; margin-top:4px; color:var(--ink-soft);">${unavailMessage}</div>`
     : `
         <div class="detail-actions">
           <div class="qty">

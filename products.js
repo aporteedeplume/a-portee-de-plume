@@ -210,7 +210,8 @@ const PRODUCTS = [
     price: 13,
     weight: 150,
     speciesCount: 30,
-    available: true,
+    available: false,
+    availabilityLabel: "Rupture de stock",
     shortDesc: "Un carnet pour découvrir les oiseaux emblématiques de Camargue, apprendre à les reconnaître et garder une trace de chaque observation.",
     longDesc: [
       "Pensé pour les curieux, les débutants et tous ceux qui souhaitent découvrir l'avifaune camarguaise sans se lancer dans un guide trop complexe, ce carnet rassemble 30 espèces parmi les plus connues et les plus simples à identifier en Camargue.",
@@ -289,6 +290,7 @@ const PRODUCTS = [
     name: "Illustrations à colorier – Carnet « Mon carnet d'observation d'oiseaux : 30 espèces de France »",
     category: "colorier",
     theme: "oiseaux",
+    images: ["images/icoo2-a.jpg", "images/icoo2-b.jpg", "images/icoo2-c.jpg"],
     price: 4.5,
     weight: 48,
     available: true,
