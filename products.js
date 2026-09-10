@@ -71,7 +71,7 @@ const PRODUCTS = [
   },
   {
     id: "coo2",
-    images: ["images/coo2-a.png"],
+    images: ["images/coo2-a.png", "images/coo2-b.jpg", "images/coo2-c.jpg", "images/coo2-d.jpg", "images/coo2-e.jpg", "images/coo2-f.jpg", "images/coo2-g.jpg", "images/coo2-h.jpg"],
     ref: "COO2",
     name: "Mon carnet d'observation d'oiseaux : 30 espèces de France",
     category: "carnets-observation",
