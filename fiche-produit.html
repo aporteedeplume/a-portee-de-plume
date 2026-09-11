@@ -188,7 +188,7 @@
   const hasMultiple = hasImages && product.images.length > 1;
   const mainImageHtml = hasImages
     ? `<img src="${product.images[0]}" alt="${product.name}">`
-    : iconSvg(product.icon, 200);
+    : `<div class="no-photo-placeholder">${iconSvg('camera', 90)}<span>Photo à venir</span></div>`;
 
   const arrowsHtml = hasMultiple
     ? `<button type="button" class="gallery-arrow gallery-arrow-prev" aria-label="Photo précédente">

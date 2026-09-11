@@ -103,7 +103,7 @@ const PRODUCTS = [
   },
   {
     id: "coo3",
-    images: ["images/coo3-a.png"],
+    images: ["images/coo3-a.png", "images/coo3-b.jpg", "images/coo3-c.jpg", "images/coo3-d.jpg", "images/coo3-e.jpg", "images/coo3-f.jpg", "images/coo3-g.jpg", "images/coo3-h.jpg"],
     ref: "COO3",
     name: "Mon carnet d'observation d'oiseaux : 50 espèces de France",
     category: "carnets-observation",
@@ -136,7 +136,7 @@ const PRODUCTS = [
   },
   {
     id: "coo4",
-    images: ["images/coo4-a.png"],
+    images: ["images/coo4-a.png", "images/coo4-b.jpg", "images/coo4-c.jpg", "images/coo4-d.jpg", "images/coo4-e.jpg", "images/coo4-g.jpg", "images/coo4-h.jpg"],
     ref: "COO4",
     name: "Mon carnet d'observation d'oiseaux : 50 espèces de France, tome 2",
     category: "carnets-observation",
@@ -314,6 +314,7 @@ const PRODUCTS = [
     name: "Illustrations à colorier – Carnet « Mon carnet d'observation d'oiseaux : 50 espèces de France »",
     category: "colorier",
     theme: "oiseaux",
+    images: ["images/icoo3-a.jpg", "images/icoo3-b.jpg", "images/icoo3-c.jpg"],
     price: 7.5,
     weight: 74,
     available: true,
