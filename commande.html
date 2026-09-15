@@ -601,28 +601,38 @@
     doc.line(margin, y, pageWidth - margin, y);
     y += 10;
 
+    // Positions des colonnes : Réf. | Article | Qté | Prix unit. | Sous-total
+    const nameX = margin + 24;
+    const qtyX = pageWidth - margin - 42;
+    const priceX = pageWidth - margin - 22;
+    const subtotalX = pageWidth - margin;
+
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(10);
-    doc.text('Article', margin, y);
-    doc.text('Qté', pageWidth - margin - 60, y, { align: 'right' });
-    doc.text('Prix unit.', pageWidth - margin - 30, y, { align: 'right' });
-    doc.text('Sous-total', pageWidth - margin, y, { align: 'right' });
+    doc.text('Réf.', margin, y);
+    doc.text('Article', nameX, y);
+    doc.text('Qté', qtyX, y, { align: 'right' });
+    doc.text('Prix unit.', priceX, y, { align: 'right' });
+    doc.text('Sous-total', subtotalX, y, { align: 'right' });
     y += 3;
     doc.setDrawColor(20,20,20);
     doc.line(margin, y, pageWidth - margin, y);
     y += 7;
 
     doc.setFont('helvetica', 'normal');
-    const nameColWidth = (pageWidth - margin - 60) - margin - 4;
+    const nameColWidth = qtyX - nameX - 4;
     let subtotal = 0;
     cart.forEach(item => {
       const lineSubtotal = item.price * item.qty;
       subtotal += lineSubtotal;
       const nameLines = doc.splitTextToSize(item.name, nameColWidth);
-      doc.text(nameLines, margin, y);
-      doc.text(String(item.qty), pageWidth - margin - 60, y, { align: 'right' });
-      doc.text(item.price.toFixed(2) + ' €', pageWidth - margin - 30, y, { align: 'right' });
-      doc.text(lineSubtotal.toFixed(2) + ' €', pageWidth - margin, y, { align: 'right' });
+      doc.setFontSize(10);
+      doc.setTextColor(20, 20, 20);
+      doc.text(item.ref, margin, y);
+      doc.text(nameLines, nameX, y);
+      doc.text(String(item.qty), qtyX, y, { align: 'right' });
+      doc.text(item.price.toFixed(2) + ' €', priceX, y, { align: 'right' });
+      doc.text(lineSubtotal.toFixed(2) + ' €', subtotalX, y, { align: 'right' });
       y += nameLines.length * 5 + 2;
     });
 
