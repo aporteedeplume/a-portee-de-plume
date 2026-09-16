@@ -202,7 +202,7 @@ const PRODUCTS = [
   },
   {
     id: "coo6",
-    images: ["images/coo6-a.png"],
+    images: ["images/coo6-a.png", "images/coo6-b.jpg", "images/coo6-c.jpg", "images/coo6-d.jpg", "images/coo6-e.jpg", "images/coo6-g.jpg", "images/coo6-h.jpg"],
     ref: "COO6",
     name: "Mon carnet d'observation d'oiseaux : 30 espèces de Camargue",
     category: "carnets-observation",
@@ -210,8 +210,7 @@ const PRODUCTS = [
     price: 13,
     weight: 150,
     speciesCount: 30,
-    available: false,
-    availabilityLabel: "Rupture de stock",
+    available: true,
     shortDesc: "Un carnet pour découvrir les oiseaux emblématiques de Camargue, apprendre à les reconnaître et garder une trace de chaque observation.",
     longDesc: [
       "Pensé pour les curieux, les débutants et tous ceux qui souhaitent découvrir l'avifaune camarguaise sans se lancer dans un guide trop complexe, ce carnet rassemble 30 espèces parmi les plus connues et les plus simples à identifier en Camargue.",
