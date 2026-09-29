@@ -136,7 +136,7 @@ const PRODUCTS = [
   },
   {
     id: "coo4",
-    images: ["images/coo4-a.png", "images/coo4-b.jpg", "images/coo4-c.jpg", "images/coo4-d.jpg", "images/coo4-e.jpg", "images/coo4-g.jpg", "images/coo4-h.jpg"],
+    images: ["images/coo4-a.png", "images/coo4-b.jpg", "images/coo4-c.jpg", "images/coo4-d.jpg", "images/coo4-e.jpg", "images/coo4-f.jpg", "images/coo4-g.jpg", "images/coo4-h.jpg"],
     ref: "COO4",
     name: "Mon carnet d'observation d'oiseaux : 50 espèces de France, tome 2",
     category: "carnets-observation",
@@ -202,7 +202,7 @@ const PRODUCTS = [
   },
   {
     id: "coo6",
-    images: ["images/coo6-a.png", "images/coo6-b.jpg", "images/coo6-c.jpg", "images/coo6-d.jpg", "images/coo6-e.jpg", "images/coo6-g.jpg", "images/coo6-h.jpg"],
+    images: ["images/coo6-a.png", "images/coo6-b.jpg", "images/coo6-c.jpg", "images/coo6-d.jpg", "images/coo6-e.jpg", "images/coo6-f.jpg", "images/coo6-g.jpg", "images/coo6-h.jpg"],
     ref: "COO6",
     name: "Mon carnet d'observation d'oiseaux : 30 espèces de Camargue",
     category: "carnets-observation",
@@ -258,6 +258,57 @@ const PRODUCTS = [
       ["Année", "2026"]
     ],
     icon: "compass"
+  },
+  {
+    id: "bjf3",
+    ref: "BJF3",
+    name: "Mon bullet journal 2027 : Sur les chemins du vivant",
+    category: "bullet-journal",
+    price: null,
+    weight: null,
+    available: false,
+    shortDesc: "Un bullet journal au fil des saisons, pour organiser son quotidien tout en gardant un pied dans la nature.",
+    longDesc: [
+      "Sur les chemins du vivant accompagnera toute l'année 2027 avec un univers tourné vers la nature et l'observation du monde qui nous entoure. Pensé comme un mélange entre outil d'organisation et carnet naturaliste, il permet de suivre ses habitudes, ses projets et ses envies tout en gardant une trace de ses sorties et de ses observations.",
+      { heading: "Un bullet journal tourné vers le vivant" },
+      "En plus des pages classiques d'un bullet journal (calendrier annuel, objectifs, projets, trackers du quotidien), ce carnet propose des espaces pensés pour celles et ceux qui aiment observer la nature au fil des saisons.",
+      "Les informations complètes sur son contenu seront précisées à l'approche de sa sortie."
+    ],
+    specs: [
+      ["Format", "A5"],
+      ["Couverture", "souple"],
+      ["Intérieur", "en couleur"],
+      ["Année", "2027"]
+    ],
+    icon: "butterfly"
+  },
+  {
+    id: "bjf4",
+    ref: "BJF4",
+    name: "Mon bullet journal 2027 : Mon quotidien en couleur",
+    category: "bullet-journal",
+    images: ["images/bjf4-a.jpg"],
+    price: null,
+    weight: null,
+    available: false,
+    shortDesc: "Un bullet journal entièrement à colorier, avec un univers différent chaque mois au fil des saisons et de l'année 2027.",
+    longDesc: [
+      "Mon quotidien en couleur est un bullet journal pensé pour celles et ceux qui aiment autant organiser leur quotidien que prendre le temps de colorier. Chaque page est illustrée en noir et blanc, prête à être mise en couleur au fil de l'année 2027.",
+      { heading: "Un thème à colorier chaque mois" },
+      "Chaque mois a son propre univers, inspiré de la saison, d'une fête qui le marque et de la nature du moment : la plage en juillet, Noël en décembre... Quelques minutes de coloriage en remplissant son tracker ou en préparant le mois suivant, et un moment d'organisation devient un moment pour soi. À la fin de l'année, aucun exemplaire ne ressemble à un autre : il est devenu le vôtre.",
+      { heading: "Tout pour suivre son année" },
+      "À l'intérieur, vous retrouvez des trackers annuels (sommeil, rêves, santé, humeur, « Rate my day »), des pages mensuelles avec habit tracker, découvertes culturelles et budget, ainsi que des pages pour vos projets, vos objectifs, votre wishlist et une check-list de valise.",
+      { heading: "Un papier pensé pour le coloriage" },
+      "L'intérieur est imprimé sur un papier choisi pour mieux supporter le coloriage."
+    ],
+    specs: [
+      ["Format", "A5"],
+      ["Couverture", "souple"],
+      ["Intérieur", "noir et blanc, entièrement à colorier"],
+      ["Thèmes", "un univers par mois, entre saisons, fêtes et nature"],
+      ["Année", "2027"]
+    ],
+    icon: "pencil"
   },
   {
     id: "icoo1",
