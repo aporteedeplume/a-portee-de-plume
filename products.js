@@ -264,7 +264,7 @@ const PRODUCTS = [
     ref: "BJF3",
     name: "Mon bullet journal 2027 : Sur les chemins du vivant",
     category: "bullet-journal",
-    price: null,
+    price: 26,
     weight: null,
     available: false,
     shortDesc: "Un bullet journal au fil des saisons, pour organiser son quotidien tout en gardant un pied dans la nature.",
@@ -288,7 +288,7 @@ const PRODUCTS = [
     name: "Mon bullet journal 2027 : Mon quotidien en couleur",
     category: "bullet-journal",
     images: ["images/bjf4-a.jpg"],
-    price: null,
+    price: 24,
     weight: null,
     available: false,
     shortDesc: "Un bullet journal entièrement à colorier, avec un univers différent chaque mois au fil des saisons et de l'année 2027.",
@@ -309,6 +309,31 @@ const PRODUCTS = [
       ["Année", "2027"]
     ],
     icon: "pencil"
+  },
+  {
+    id: "bjf5",
+    ref: "BJF5",
+    name: "Mon bullet journal 2027 : Les traces de mon année",
+    category: "bullet-journal",
+    images: ["images/bjf5-a.jpg"],
+    price: 22,
+    weight: null,
+    available: false,
+    shortDesc: "Le bullet journal poétique et coloré de la collection, de retour pour accompagner l'année 2027.",
+    longDesc: [
+      "Les traces de mon année revient pour 2027, dans la continuité de la version 2026 : un univers doux inspiré de la nature, des fleurs et des papillons, pensé comme un mélange entre outil d'organisation et carnet personnel.",
+      { heading: "Une année à suivre, mois après mois" },
+      "Le carnet comprend plusieurs trackers annuels pour observer son année dans son ensemble : sommeil, rêves, santé, humeur ainsi qu'un tracker « Rate my day » pour garder une trace de son ressenti au fil des jours.",
+      "Chaque mois possède également ses propres pages à compléter avec un habit tracker, des pages consacrées à vos découvertes culturelles, une page budget et des pages libres à utiliser pour vos notes, souvenirs, idées ou selon vos envies.",
+      "Des espaces supplémentaires sont dédiés à vos projets, vos objectifs, votre wishlist et une check-list de valise pour préparer plus facilement vos voyages et escapades."
+    ],
+    specs: [
+      ["Format", "A5"],
+      ["Couverture", "souple"],
+      ["Intérieur", "en couleur"],
+      ["Année", "2027"]
+    ],
+    icon: "compass"
   },
   {
     id: "icoo1",
