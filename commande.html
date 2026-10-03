@@ -121,6 +121,24 @@
       </div>
     </div>
 
+    <div class="shipping-fields" id="payment-fields" style="display:none;">
+      <span class="label">Mode de paiement</span>
+      <label class="ship-option">
+        <input type="radio" name="payment" value="virement" checked>
+        <span class="ship-info">
+          <span class="ship-name">Virement bancaire</span>
+          <span class="ship-detail">Le RIB vous sera envoyé par e-mail</span>
+        </span>
+      </label>
+      <label class="ship-option">
+        <input type="radio" name="payment" value="carte">
+        <span class="ship-info">
+          <span class="ship-name">Carte bancaire</span>
+          <span class="ship-detail">Un lien de paiement sécurisé SumUp vous sera envoyé par e-mail</span>
+        </span>
+      </label>
+    </div>
+
     <div class="summary-total">
       <span>Total</span>
       <span id="summary-total">0,00 €</span>
@@ -161,11 +179,18 @@
       <a href="mailto:aporteedeplume.contact@gmail.com" style="color:var(--brique); font-weight:600;">aporteedeplume.contact@gmail.com</a>.
     </div>
 
-    <div class="next-steps" style="margin-top:16px; padding-top:16px;">
+    <div class="next-steps" style="margin-top:16px; padding-top:16px;" id="payment-info-virement">
       <b>Règlement par virement</b>
-      Le RIB est directement inclus en page 2 de votre bon de commande PDF.
+      Après réception de votre bon de commande, vous recevrez le RIB par e-mail.
       <br><br>
       Merci d'indiquer <strong>votre prénom et nom</strong> dans le libellé du virement, afin que votre commande soit facilement retrouvée.
+      <br><br>
+      La commande est traitée et expédiée <strong>à réception du paiement</strong>.
+    </div>
+
+    <div class="next-steps" style="margin-top:16px; padding-top:16px; display:none;" id="payment-info-carte">
+      <b>Règlement par carte bancaire</b>
+      Après réception de votre bon de commande, vous recevrez par e-mail un lien de paiement sécurisé SumUp.
       <br><br>
       La commande est traitée et expédiée <strong>à réception du paiement</strong>.
     </div>
@@ -276,9 +301,19 @@
   const deliveryLabel = document.getElementById('delivery-label');
   const homeAddressBlock = document.getElementById('home-address-block');
   const relayPointBlock = document.getElementById('relay-point-block');
+  const paymentFields = document.getElementById('payment-fields');
+  const paymentInfoVirement = document.getElementById('payment-info-virement');
+  const paymentInfoCarte = document.getElementById('payment-info-carte');
   const summaryTotal = document.getElementById('summary-total');
   const generateBtn = document.getElementById('generate-btn');
   const formMsg = document.getElementById('form-msg');
+
+  function updatePaymentInfoVisibility(){
+    const checked = document.querySelector('input[name="payment"]:checked');
+    const method = checked ? checked.value : 'virement';
+    paymentInfoVirement.style.display = method === 'virement' ? 'block' : 'none';
+    paymentInfoCarte.style.display = method === 'carte' ? 'block' : 'none';
+  }
 
   function fmt(n){
     if(n === null || n === undefined) return 'Prix à venir';
@@ -423,6 +458,7 @@
       summarySubtotalRow.style.display = 'none';
       shippingFields.style.display = 'none';
       deliveryFields.style.display = 'none';
+      paymentFields.style.display = 'none';
       summaryTotal.textContent = fmt(0);
       generateBtn.disabled = true;
       return;
@@ -430,6 +466,7 @@
     summarySubtotalRow.style.display = 'flex';
     shippingFields.style.display = 'block';
     deliveryFields.style.display = 'block';
+    paymentFields.style.display = 'block';
     generateBtn.disabled = false;
     updateDeliveryFieldsVisibility();
 
@@ -464,6 +501,11 @@
   document.querySelectorAll('input[name="shipping"]').forEach(radio => {
     radio.addEventListener('change', renderSummary);
   });
+
+  document.querySelectorAll('input[name="payment"]').forEach(radio => {
+    radio.addEventListener('change', updatePaymentInfoVisibility);
+  });
+  updatePaymentInfoVisibility();
 
   function showMsg(text, type){
     formMsg.textContent = text;
@@ -524,6 +566,8 @@
     }
 
     const buyerLabel = name;
+    const checkedPayment = document.querySelector('input[name="payment"]:checked');
+    const paymentMethod = checkedPayment ? checkedPayment.value : 'virement';
 
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({ unit: 'mm', format: 'a4' });
@@ -690,76 +734,22 @@
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9.5);
     doc.setTextColor(70,70,70);
-    const paymentLines = [
-      'Paiement par virement bancaire. Le RIB figure en page 2 de ce document.',
-      'Libellé du virement à indiquer : "' + buyerLabel + '"',
-      'La commande est traitée et expédiée à réception du paiement.'
-    ];
+    const paymentLines = paymentMethod === 'carte'
+      ? [
+          'Paiement par carte bancaire via un lien de paiement sécurisé SumUp.',
+          'Ce lien vous sera envoyé par e-mail après réception de ce bon de commande.',
+          'La commande est traitée et expédiée à réception du paiement.'
+        ]
+      : [
+          'Paiement par virement bancaire. Le RIB vous sera envoyé par e-mail après réception de ce bon de commande.',
+          'Libellé du virement à indiquer : "' + buyerLabel + '"',
+          'La commande est traitée et expédiée à réception du paiement.'
+        ];
     paymentLines.forEach(line => {
       const wrapped = doc.splitTextToSize(line, pageWidth - margin*2);
       doc.text(wrapped, margin, y);
       y += wrapped.length * 5 + 3;
     });
-
-    // --- Page 2 : coordonnées bancaires ---
-    doc.addPage();
-    let y2 = 28;
-
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(16);
-    doc.setTextColor(20,20,20);
-    doc.text('Coordonnées bancaires', margin, y2);
-    y2 += 6;
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(10);
-    doc.setTextColor(90,90,90);
-    doc.text('À utiliser pour le règlement de votre commande N° ' + orderNumber, margin, y2);
-    y2 += 16;
-
-    doc.setDrawColor(180,180,180);
-    doc.line(margin, y2, pageWidth - margin, y2);
-    y2 += 14;
-
-    const ribRows = [
-      ['Titulaire du compte', BANK_DETAILS.titulaire],
-      ['IBAN', BANK_DETAILS.iban],
-      ['BIC / SWIFT', BANK_DETAILS.bic],
-      ['Banque', BANK_DETAILS.banque]
-    ];
-    ribRows.forEach(([label, value]) => {
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(9);
-      doc.setTextColor(90,90,90);
-      doc.text(label.toUpperCase(), margin, y2);
-      y2 += 6;
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(13);
-      doc.setTextColor(20,20,20);
-      doc.text(value, margin, y2);
-      y2 += 14;
-    });
-
-    doc.setDrawColor(180,180,180);
-    doc.line(margin, y2, pageWidth - margin, y2);
-    y2 += 14;
-
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(10);
-    doc.setTextColor(20,20,20);
-    doc.text('Libellé du virement à indiquer', margin, y2);
-    y2 += 8;
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(13);
-    doc.setTextColor(156,74,50); // brique
-    doc.text('"' + buyerLabel + '"', margin, y2);
-    y2 += 14;
-
-    doc.setFont('helvetica', 'italic');
-    doc.setFontSize(9);
-    doc.setTextColor(120,120,120);
-    const ribNote = 'Ce libellé permet de retrouver facilement votre commande à réception du virement. La commande est traitée et expédiée dès réception du paiement.';
-    const ribNoteLines = doc.splitTextToSize(ribNote, pageWidth - margin*2);
-    doc.text(ribNoteLines, margin, y2);
 
     doc.save('bon-de-commande-' + orderNumber + '.pdf');
     showMsg("Votre bon de commande a été téléchargé. Il ne reste plus qu'à l'envoyer par e-mail à " + CONTACT_EMAIL + ".", "success");

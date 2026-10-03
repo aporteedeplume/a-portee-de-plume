@@ -234,32 +234,6 @@ const PRODUCTS = [
     relatedAddonId: "icoo6"
   },
   {
-    id: "bjf2",
-    ref: "BJF2",
-    name: "Mon bullet journal 2026 : Les traces de mon année",
-    category: "bullet-journal",
-    images: ["images/bjf2-a.png"],
-    price: 22,
-    weight: 360,
-    available: true,
-    shortDesc: "Un bullet journal poétique et coloré pour organiser son quotidien, suivre son évolution et conserver une trace de tout ce qui fait son année.",
-    longDesc: [
-      "Avec son univers doux inspiré de la nature, des fleurs et des papillons, Les traces de mon année accompagne toute l'année 2026. Pensé comme un mélange entre outil d'organisation et carnet personnel, il permet de suivre ses habitudes, ses projets, ses envies et les petits moments du quotidien.",
-      { heading: "Une année à suivre, mois après mois" },
-      "Le carnet comprend plusieurs trackers annuels pour observer son année dans son ensemble : sommeil, rêves, santé, humeur ainsi qu'un tracker « Rate my day » pour garder une trace de son ressenti au fil des jours.",
-      "Chaque mois possède également ses propres pages à compléter avec un habit tracker, des pages consacrées à vos découvertes culturelles, une page budget et des pages libres à utiliser pour vos notes, souvenirs, idées ou selon vos envies.",
-      "Des espaces supplémentaires sont dédiés à vos projets, vos objectifs, votre wishlist et une check-list de valise pour préparer plus facilement vos voyages et escapades.",
-      "Au fil des pages, le bullet journal devient ainsi autant un outil pour organiser son année qu'un endroit où conserver les habitudes, envies, découvertes et souvenirs qui auront marqué 2026."
-    ],
-    specs: [
-      ["Format", "A5"],
-      ["Couverture", "souple"],
-      ["Intérieur", "en couleur"],
-      ["Année", "2026"]
-    ],
-    icon: "compass"
-  },
-  {
     id: "bjf3",
     ref: "BJF3",
     name: "Mon bullet journal 2027 : Sur les chemins du vivant",
