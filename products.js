@@ -236,16 +236,16 @@ const PRODUCTS = [
   {
     id: "bjf3",
     ref: "BJF3",
-    name: "Mon bullet journal 2027 : Sur les chemins du vivant",
+    name: "Mon journal illustré 2027 : Sur les chemins du vivant",
     category: "bullet-journal",
     price: 26,
     weight: null,
     available: false,
-    shortDesc: "Un bullet journal au fil des saisons, pour organiser son quotidien tout en gardant un pied dans la nature.",
+    shortDesc: "Un journal illustré au fil des saisons, pour organiser son quotidien tout en gardant un pied dans la nature.",
     longDesc: [
       "Sur les chemins du vivant accompagnera toute l'année 2027 avec un univers tourné vers la nature et l'observation du monde qui nous entoure. Pensé comme un mélange entre outil d'organisation et carnet naturaliste, il permet de suivre ses habitudes, ses projets et ses envies tout en gardant une trace de ses sorties et de ses observations.",
-      { heading: "Un bullet journal tourné vers le vivant" },
-      "En plus des pages classiques d'un bullet journal (calendrier annuel, objectifs, projets, trackers du quotidien), ce carnet propose des espaces pensés pour celles et ceux qui aiment observer la nature au fil des saisons.",
+      { heading: "Un journal illustré tourné vers le vivant" },
+      "En plus des pages classiques d'un journal illustré (calendrier annuel, objectifs, projets, trackers du quotidien), ce carnet propose des espaces pensés pour celles et ceux qui aiment observer la nature au fil des saisons.",
       "Les informations complètes sur son contenu seront précisées à l'approche de sa sortie."
     ],
     specs: [
@@ -259,26 +259,25 @@ const PRODUCTS = [
   {
     id: "bjf4",
     ref: "BJF4",
-    name: "Mon bullet journal 2027 : Mon quotidien en couleur",
+    name: "Mon journal illustré 2027 : Mon quotidien en couleur",
     category: "bullet-journal",
     images: ["images/bjf4-a.jpg"],
     price: 24,
-    weight: null,
-    available: false,
-    shortDesc: "Un bullet journal entièrement à colorier, avec un univers différent chaque mois au fil des saisons et de l'année 2027.",
+    weight: 420,
+    available: true,
+    shortDesc: "Un journal illustré entièrement à colorier, avec un univers différent chaque mois au fil des saisons et de l'année 2027.",
     longDesc: [
-      "Mon quotidien en couleur est un bullet journal pensé pour celles et ceux qui aiment autant organiser leur quotidien que prendre le temps de colorier. Chaque page est illustrée en noir et blanc, prête à être mise en couleur au fil de l'année 2027.",
+      "Mon quotidien en couleur est un journal illustré pensé pour celles et ceux qui aiment autant organiser leur quotidien que prendre le temps de colorier. Chaque page est illustrée en noir et blanc, prête à être mise en couleur au fil de l'année 2027.",
       { heading: "Un thème à colorier chaque mois" },
       "Chaque mois a son propre univers, inspiré de la saison, d'une fête qui le marque et de la nature du moment : la plage en juillet, Noël en décembre... Quelques minutes de coloriage en remplissant son tracker ou en préparant le mois suivant, et un moment d'organisation devient un moment pour soi. À la fin de l'année, aucun exemplaire ne ressemble à un autre : il est devenu le vôtre.",
       { heading: "Tout pour suivre son année" },
-      "À l'intérieur, vous retrouvez des trackers annuels (sommeil, rêves, santé, humeur, « Rate my day »), des pages mensuelles avec habit tracker, découvertes culturelles et budget, ainsi que des pages pour vos projets, vos objectifs, votre wishlist et une check-list de valise.",
-      { heading: "Un papier pensé pour le coloriage" },
-      "L'intérieur est imprimé sur un papier choisi pour mieux supporter le coloriage."
+      "À l'intérieur, vous retrouvez des trackers annuels (sommeil, rêves, santé, humeur, « Rate my day »), des pages mensuelles avec habit tracker, découvertes culturelles et budget, ainsi que des pages pour vos projets, vos objectifs, votre wishlist et une check-list de valise."
     ],
     specs: [
       ["Format", "A5"],
       ["Couverture", "souple"],
       ["Intérieur", "noir et blanc, entièrement à colorier"],
+      ["Pages", "284"],
       ["Thèmes", "un univers par mois, entre saisons, fêtes et nature"],
       ["Année", "2027"]
     ],
@@ -287,24 +286,26 @@ const PRODUCTS = [
   {
     id: "bjf5",
     ref: "BJF5",
-    name: "Mon bullet journal 2027 : Les traces de mon année",
+    name: "Mon journal illustré 2027 : Les traces de mon année",
     category: "bullet-journal",
     images: ["images/bjf5-a.jpg"],
     price: 22,
-    weight: null,
-    available: false,
-    shortDesc: "Le bullet journal poétique et coloré de la collection, de retour pour accompagner l'année 2027.",
+    weight: 350,
+    available: true,
+    shortDesc: "Un journal illustré poétique et coloré pour organiser son quotidien, suivre son évolution et garder une trace de tout ce qui fait son année 2027.",
     longDesc: [
-      "Les traces de mon année revient pour 2027, dans la continuité de la version 2026 : un univers doux inspiré de la nature, des fleurs et des papillons, pensé comme un mélange entre outil d'organisation et carnet personnel.",
+      "Avec son univers doux inspiré de la nature, des fleurs et des papillons, Les traces de mon année accompagne toute l'année 2027. Pensé comme un mélange entre outil d'organisation et carnet personnel, il permet de suivre ses habitudes, ses projets, ses envies et les petits moments du quotidien.",
       { heading: "Une année à suivre, mois après mois" },
-      "Le carnet comprend plusieurs trackers annuels pour observer son année dans son ensemble : sommeil, rêves, santé, humeur ainsi qu'un tracker « Rate my day » pour garder une trace de son ressenti au fil des jours.",
-      "Chaque mois possède également ses propres pages à compléter avec un habit tracker, des pages consacrées à vos découvertes culturelles, une page budget et des pages libres à utiliser pour vos notes, souvenirs, idées ou selon vos envies.",
-      "Des espaces supplémentaires sont dédiés à vos projets, vos objectifs, votre wishlist et une check-list de valise pour préparer plus facilement vos voyages et escapades."
+      "Des trackers annuels permettent d'observer son année dans son ensemble : sommeil, rêves, santé, humeur, ainsi qu'un tracker « Rate my day » pour garder une trace de son ressenti au fil des jours.",
+      "Chaque mois s'ouvre sur une page de présentation illustrée, puis propose son habit tracker, des pages consacrées à vos découvertes culturelles, une page budget et des pages libres pour vos notes, souvenirs et idées.",
+      { heading: "Un espace pour tout garder" },
+      "Des pages supplémentaires sont dédiées à vos projets, vos objectifs, votre wishlist et une check-list de valise pour préparer vos voyages et escapades."
     ],
     specs: [
       ["Format", "A5"],
       ["Couverture", "souple"],
       ["Intérieur", "en couleur"],
+      ["Pages", "255"],
       ["Année", "2027"]
     ],
     icon: "compass"
@@ -463,7 +464,7 @@ const PRODUCTS = [
     shortDesc: "Un petit lot coloré pour décorer carnets, agendas, lettres et créations.",
     longDesc: [
       "Ce lot contient 10 autocollants représentant différents oiseaux, à utiliser selon vos envies pour personnaliser vos supports du quotidien.",
-      "Ils peuvent être collés dans un carnet d'observation, un bullet journal, un agenda, sur une carte ou dans toute autre création personnelle."
+      "Ils peuvent être collés dans un carnet d'observation, un journal illustré, un agenda, sur une carte ou dans toute autre création personnelle."
     ],
     specs: [
       ["Contenu", "10 autocollants d'oiseaux"],
@@ -484,7 +485,7 @@ const PRODUCTS = [
     shortDesc: "Un petit lot coloré pour décorer carnets, agendas, lettres et créations.",
     longDesc: [
       "Ce lot contient 10 autocollants représentant différents insectes, à utiliser selon vos envies pour personnaliser vos supports du quotidien.",
-      "Ils peuvent être collés dans un carnet d'observation, un bullet journal, un agenda, sur une carte ou dans toute autre création personnelle."
+      "Ils peuvent être collés dans un carnet d'observation, un journal illustré, un agenda, sur une carte ou dans toute autre création personnelle."
     ],
     specs: [
       ["Contenu", "10 autocollants d'insectes"],
@@ -500,7 +501,7 @@ const PRODUCTS = [
    d'un autre thème que "oiseaux" est ajouté au catalogue — même logique que pour "Autocollants". */
 const CATEGORIES = [
   { id: "carnets-observation", label: "Carnets d'observation" },
-  { id: "bullet-journal", label: "Bullet Journal" },
+  { id: "bullet-journal", label: "Journaux illustrés" },
   { id: "colorier", label: "Illustrations à colorier" },
   { id: "stickers", label: "Autocollants" }
 ];
