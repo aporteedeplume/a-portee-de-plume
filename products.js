@@ -261,9 +261,9 @@ const PRODUCTS = [
     ref: "BJF4",
     name: "Mon journal illustré 2027 : Mon quotidien en couleur",
     category: "bullet-journal",
-    images: ["images/bjf4-a.jpg"],
+    images: ["images/bjf4-a.jpg", "images/bjf4-b.jpg", "images/bjf4-c.jpg", "images/bjf4-d.jpg", "images/bjf4-e.jpg", "images/bjf4-f.jpg", "images/bjf4-g.jpg", "images/bjf4-h.jpg", "images/bjf4-i.jpg", "images/bjf4-j.jpg"],
     price: 24,
-    weight: 420,
+    weight: 440,
     available: true,
     shortDesc: "Un journal illustré entièrement à colorier, avec un univers différent chaque mois au fil des saisons et de l'année 2027.",
     longDesc: [
