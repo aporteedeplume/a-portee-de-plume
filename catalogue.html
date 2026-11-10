@@ -122,7 +122,8 @@
   let searchQuery = '';
 
   // Construit les pastilles de filtre à partir des catégories du catalogue
-  CATEGORIES.forEach(cat => {
+  // (une catégorie sans aucun article n'est pas affichée tant qu'elle est vide)
+  CATEGORIES.filter(cat => PRODUCTS.some(p => p.category === cat.id)).forEach(cat => {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'filter-pill';

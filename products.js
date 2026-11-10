@@ -238,6 +238,7 @@ const PRODUCTS = [
     ref: "BJF3",
     name: "Mon journal illustré 2027 : Sur les chemins du vivant",
     category: "bullet-journal",
+    images: ["images/bjf3-a.jpg"],
     price: 26,
     weight: null,
     available: false,
@@ -502,6 +503,7 @@ const PRODUCTS = [
 const CATEGORIES = [
   { id: "carnets-observation", label: "Carnets d'observation" },
   { id: "bullet-journal", label: "Journaux illustrés" },
+  { id: "autres-carnets", label: "Autres carnets" },
   { id: "colorier", label: "Illustrations à colorier" },
   { id: "stickers", label: "Autocollants" }
 ];
