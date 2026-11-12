@@ -104,6 +104,7 @@
     return longDesc.map(block => {
       if(typeof block === 'string') return `<p class="long">${block}</p>`;
       if(block && block.heading) return `<h3 class="detail-subhead">${block.heading}</h3>`;
+      if(block && block.list) return `<ul class="detail-list">${block.list.map(li => `<li>${li}</li>`).join('')}</ul>`;
       return '';
     }).join('');
   }

@@ -241,18 +241,39 @@ const PRODUCTS = [
     images: ["images/bjf3-a.jpg"],
     price: 26,
     weight: null,
-    available: false,
-    shortDesc: "Un journal illustré au fil des saisons, pour organiser son quotidien tout en gardant un pied dans la nature.",
+    available: true,
+    shortDesc: "Un journal illustré pour vivre 2027 au rythme de la nature : près de 300 espèces de saison à observer, un mois après l'autre.",
     longDesc: [
-      "Sur les chemins du vivant accompagnera toute l'année 2027 avec un univers tourné vers la nature et l'observation du monde qui nous entoure. Pensé comme un mélange entre outil d'organisation et carnet naturaliste, il permet de suivre ses habitudes, ses projets et ses envies tout en gardant une trace de ses sorties et de ses observations.",
-      { heading: "Un journal illustré tourné vers le vivant" },
-      "En plus des pages classiques d'un journal illustré (calendrier annuel, objectifs, projets, trackers du quotidien), ce carnet propose des espaces pensés pour celles et ceux qui aiment observer la nature au fil des saisons.",
-      "Les informations complètes sur son contenu seront précisées à l'approche de sa sortie."
+      "Vivez 2027 au rythme de la nature.",
+      "Sur les chemins du vivant est un journal illustré pensé pour celles et ceux qui aiment observer le monde qui les entoure : un oiseau à la mangeoire, une fleur au bord du chemin, un champignon après la pluie… Mois après mois, il accompagne votre année tout en vous invitant à ralentir et à regarder autour de vous.",
+      "Chaque mois, découvrez 16 animaux et 16 plantes de saison, tous illustrés à la main : près de 300 espèces au fil de l'année, choisies pour être observables partout en France, au jardin, en ville, en forêt ou en promenade. Notez la date et le lieu de chaque rencontre et constituez votre propre inventaire.",
+      { heading: "Pour organiser votre année" },
+      { list: [
+        "calendrier annuel, objectifs, projets et wishlist",
+        "check-list valise et 26 activités de l'alphabet",
+        "suivi de vos livres, films, séries et musiques",
+        "trackers annuels : sommeil, rêves, santé, humeur, états du ciel…"
+      ] },
+      { heading: "Pour vivre la nature" },
+      { list: [
+        "un calendrier du vivant : migrations, brame du cerf, floraisons, saison des champignons…",
+        "vos envies nature et les espèces que vous aimeriez voir",
+        "un inventaire naturaliste par milieu : jardins, forêts, prairies, mares, littoral, montagne…"
+      ] },
+      { heading: "Chaque mois" },
+      { list: [
+        "une double page d'ouverture illustrée et vos objectifs du mois",
+        "un calendrier mensuel, un habit tracker et un budget tracker",
+        "la faune et la flore du mois, et des pages « Mes observations »",
+        "des pages pour noter le meilleur de chaque jour, votre culture du mois et vos notes"
+      ] },
+      "Un cadeau idéal pour les amoureux de la nature, les promeneurs, les jardiniers, les observateurs d'oiseaux… ou pour soi, pour garder une trace de chaque rencontre avec le vivant."
     ],
     specs: [
-      ["Format", "A5"],
+      ["Format", "15,8 × 22 cm"],
       ["Couverture", "souple"],
-      ["Intérieur", "en couleur"],
+      ["Intérieur", "entièrement illustré en couleur"],
+      ["Contenu", "16 animaux et 16 plantes de saison par mois"],
       ["Année", "2027"]
     ],
     icon: "butterfly"

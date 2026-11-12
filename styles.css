@@ -258,6 +258,8 @@ section{padding:88px 0;}
   font-family:'Fraunces', serif; font-weight:600; font-size:1.1rem; color:var(--ink);
   margin-top:24px; margin-bottom:8px;
 }
+.detail-list{color:var(--ink-soft); font-size:1rem; max-width:52ch; margin:0 0 16px; padding-left:1.2em;}
+.detail-list li{margin-bottom:6px; line-height:1.5;}
 .specs-block{
   margin:26px 0; padding:20px 22px; background:var(--paper-deep); border:1px solid var(--line);
   max-width:52ch;
