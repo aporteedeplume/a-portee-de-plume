@@ -310,7 +310,7 @@ const PRODUCTS = [
     ref: "BJF5",
     name: "Mon journal illustré 2027 : Les traces de mon année",
     category: "bullet-journal",
-    images: ["images/bjf5-a.jpg"],
+    images: ["images/bjf5-a.jpg", "images/bjf5-b.jpg", "images/bjf5-c.jpg", "images/bjf5-d.jpg", "images/bjf5-e.jpg", "images/bjf5-f.jpg", "images/bjf5-g.jpg", "images/bjf5-h.jpg", "images/bjf5-i.jpg"],
     price: 22,
     weight: 350,
     available: true,
