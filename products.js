@@ -355,11 +355,10 @@ const PRODUCTS = [
       speciesList: "oiseaux",            // clé de la liste dans species.js
       weightPerIllustration: 1.6        // grammes, estimation (basée sur les lots tout prêts) : sert au calcul des frais de port
     },
-    shortDesc: "Composez votre propre set : cochez les oiseaux que vous souhaitez colorier, seules les illustrations choisies sont imprimées.",
+    shortDesc: "Composez votre propre set d'illustrations d'oiseaux à colorier.",
     longDesc: [
       "Ce set se compose à votre goût : parmi toutes les espèces disponibles, cochez celles que vous souhaitez colorier. Seules les illustrations choisies sont imprimées, avec un guide de correspondance pour retrouver chaque oiseau.",
-      "Une fois coloriées, les illustrations peuvent être replacées sur la page de l'espèce correspondante dans vos carnets d'observation, ou servir pour toute autre création.",
-      "Le prix est de 0,18 € l'illustration, au même tarif sur papier ou sur papier autocollant."
+      "Une fois coloriées, les illustrations peuvent être replacées sur la page de l'espèce correspondante dans vos carnets d'observation, ou servir pour toute autre création."
     ],
     specs: [
       ["Prix", "0,18 € l'illustration"],
