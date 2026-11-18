@@ -667,7 +667,7 @@
       const lineSubtotal = item.price * item.qty;
       subtotal += lineSubtotal;
       const rowName = item.isCustomSet
-        ? item.name + ' — ' + setSummaryText(item).replace(' · ', ', ')
+        ? item.name + ' — ' + item.count + (item.count > 1 ? ' illustrations' : ' illustration') + ', ' + item.paper.label.toLowerCase()
             + (item.setCount > 1 ? ' — set n°' + item.setIndex : '')
             + ' (liste détaillée en fin de document)'
         : item.name;
@@ -756,7 +756,7 @@
           py += 5;
           doc.text(set.ref + ' — ' + set.name, margin, py);
           py += 5;
-          doc.text('Papier : ' + set.paper.label + '  ·  ' + set.count + (set.count > 1 ? ' illustrations' : ' illustration') + '  ·  ' + set.price.toFixed(2) + ' €', margin, py);
+          doc.text('Type de papier : ' + set.paper.label + '  ·  ' + set.count + (set.count > 1 ? ' illustrations' : ' illustration') + '  ·  ' + set.price.toFixed(2) + ' €', margin, py);
           py += 5;
           doc.setDrawColor(180, 180, 180);
           doc.line(margin, py, pageWidth - margin, py);

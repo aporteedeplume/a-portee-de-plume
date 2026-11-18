@@ -337,6 +337,38 @@ const PRODUCTS = [
     icon: "compass"
   },
   {
+    id: "icoo0",
+    ref: "ICOO0",
+    name: "Set d'illustrations à colorier personnalisable – Oiseaux",
+    category: "colorier",
+    theme: "oiseaux",
+    images: ["images/icoo0-a.jpg"],
+    price: 0.18,
+    priceLabel: "0,18 € l'illustration",
+    available: true,
+    customSet: {
+      unitPrice: 0.18,
+      papers: [
+        { id: "simple", label: "Papier" },
+        { id: "autocollant", label: "Papier autocollant" }
+      ],
+      speciesList: "oiseaux",            // clé de la liste dans species.js
+      weightPerIllustration: 1.6        // grammes, estimation (basée sur les lots tout prêts) : sert au calcul des frais de port
+    },
+    shortDesc: "Composez votre propre set : cochez les oiseaux que vous souhaitez colorier, seules les illustrations choisies sont imprimées.",
+    longDesc: [
+      "Ce set se compose à votre goût : parmi toutes les espèces disponibles, cochez celles que vous souhaitez colorier. Seules les illustrations choisies sont imprimées, avec un guide de correspondance pour retrouver chaque oiseau.",
+      "Une fois coloriées, les illustrations peuvent être replacées sur la page de l'espèce correspondante dans vos carnets d'observation, ou servir pour toute autre création.",
+      "Le prix est de 0,18 € l'illustration, au même tarif sur papier ou sur papier autocollant."
+    ],
+    specs: [
+      ["Prix", "0,18 € l'illustration"],
+      ["Papier au choix", "papier ou papier autocollant"],
+      ["Contenu", "les espèces de votre choix"]
+    ],
+    icon: "pencil"
+  },
+  {
     id: "icoo1",
     ref: "ICOO1",
     name: "Illustrations à colorier – Carnet « Mon carnet d'observation d'oiseaux : 20 espèces de France »",
@@ -476,37 +508,6 @@ const PRODUCTS = [
     ],
     icon: "pencil",
     relatedTo: ["coo6"]
-  },
-  {
-    id: "icoo0",
-    ref: "ICOO0",
-    name: "Set d'illustrations à colorier personnalisable – Oiseaux",
-    category: "colorier",
-    theme: "oiseaux",
-    price: 0.18,
-    priceLabel: "0,18 € l'illustration",
-    available: true,
-    customSet: {
-      unitPrice: 0.18,
-      papers: [
-        { id: "simple", label: "A4 simple" },
-        { id: "autocollant", label: "A4 autocollant" }
-      ],
-      speciesList: "oiseaux",            // clé de la liste dans species.js
-      weightPerIllustration: 1.6        // grammes, estimation (basée sur les lots tout prêts) : sert au calcul des frais de port
-    },
-    shortDesc: "Composez votre propre set : cochez les oiseaux que vous souhaitez colorier, seules les illustrations choisies sont imprimées.",
-    longDesc: [
-      "Ce set se compose à votre goût : parmi toutes les espèces disponibles, cochez celles que vous souhaitez colorier. Seules les illustrations choisies sont imprimées, avec un guide de correspondance pour retrouver chaque oiseau.",
-      "Une fois coloriées, les illustrations peuvent être replacées sur la page de l'espèce correspondante dans vos carnets d'observation, ou servir pour toute autre création.",
-      "Le prix est de 0,18 € l'illustration, au même tarif sur papier A4 simple ou A4 autocollant."
-    ],
-    specs: [
-      ["Prix", "0,18 € l'illustration"],
-      ["Papier au choix", "A4 simple ou A4 autocollant"],
-      ["Contenu", "les espèces de votre choix"]
-    ],
-    icon: "pencil"
   },
   {
     id: "auo1",
