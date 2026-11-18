@@ -319,6 +319,41 @@ section{padding:88px 0;}
 }
 .addon-row input[type="checkbox"]:checked::before{transform:scale(1);}
 .addon-row strong{color:var(--ink); font-weight:700;}
+/* Set d'illustrations personnalisable (fiche produit + panier) */
+.set-builder{margin:6px 0 26px; max-width:52ch;}
+.set-builder .label{display:block; margin:16px 0 8px;}
+.set-builder .search-bar{max-width:none; margin-bottom:10px;}
+.species-list{max-height:340px; overflow-y:auto; border:1px solid var(--line); background:var(--paper);}
+.species-item{
+  display:flex; align-items:center; gap:10px; padding:9px 12px; cursor:pointer;
+  border-bottom:1px solid var(--line); font-size:.92rem; user-select:none;
+}
+.species-item:last-child{border-bottom:none;}
+.species-item:hover{background:var(--paper-deep);}
+.species-item:has(input:checked){background:var(--paper-deep); font-weight:600;}
+.species-item input[type="checkbox"]{
+  appearance:none; width:18px; height:18px; border:1.5px solid var(--ink); background:var(--paper);
+  display:grid; place-content:center; cursor:pointer; flex:none; margin:0;
+}
+.species-item input[type="checkbox"]::before{
+  content:""; width:10px; height:10px; transform:scale(0); background:var(--brique);
+  clip-path:polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 86% 0%, 45% 62%);
+  transition:transform .1s ease-in;
+}
+.species-item input[type="checkbox"]:checked::before{transform:scale(1);}
+.species-empty{padding:18px 14px; color:var(--ink-soft); font-size:.9rem; text-align:center;}
+.set-summary{
+  display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:6px 16px;
+  margin:14px 0; padding:12px 14px; background:var(--paper-deep); border:1px solid var(--line);
+}
+.set-summary .set-count{font-size:.92rem; color:var(--ink-soft);}
+.set-summary .set-total{font-family:'Space Mono', monospace; font-weight:700; font-size:1.15rem; color:var(--ink);}
+.set-detail{font-size:.8rem; color:var(--ink-soft); margin-top:4px;}
+.set-detail summary{cursor:pointer; color:var(--sauge-deep); font-weight:600;}
+.set-detail ol{margin:6px 0 0; padding-left:1.6em; columns:2; column-gap:22px;}
+.set-detail li{break-inside:avoid; margin-bottom:2px;}
+.set-qty-note{font-family:'Space Mono', monospace; font-size:.78rem; color:var(--ink-soft); white-space:nowrap;}
+@media (max-width: 640px){ .set-detail ol{columns:1;} }
 .cart-empty{padding:70px 20px; text-align:center; border:1px dashed var(--line);}
 .cart-empty p{color:var(--ink-soft); margin-bottom:20px;}
 

@@ -238,10 +238,12 @@
           </div>
         </a>
         <div class="foot">
-          <span class="price">${fmtPrice(p.price)}</span>
+          <span class="price">${p.priceLabel || fmtPrice(p.price)}</span>
           ${p.available === false
             ? `<button type="button" class="tile-add" disabled>${p.availabilityLabel || 'Arrive prochainement'}</button>`
-            : `<button type="button" class="tile-add" data-id="${p.id}">+ Ajouter</button>`}
+            : p.customSet
+              ? `<a href="fiche-produit.html?id=${encodeURIComponent(p.id)}" class="tile-add" style="text-decoration:none; display:inline-block;">Composer mon set</a>`
+              : `<button type="button" class="tile-add" data-id="${p.id}">+ Ajouter</button>`}
         </div>
       `;
       grid.appendChild(tile);

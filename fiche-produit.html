@@ -87,6 +87,7 @@
 </div>
 
 <script src="products.js"></script>
+<script src="species.js"></script>
 <script src="icons.js"></script>
 <script src="cart.js"></script>
 <script>
@@ -94,6 +95,94 @@
   function fmtPrice(n){
     if(n === null || n === undefined) return 'Prix à venir';
     return n.toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €';
+  }
+
+  // ---- Set personnalisable : choix des espèces, prix en direct, ajout au panier ----
+  function initSetBuilder(product){
+    const cfg = product.customSet;
+    const allSpecies = ((typeof SPECIES_LISTS !== 'undefined' && SPECIES_LISTS[cfg.speciesList]) || [])
+      .slice()
+      .sort((a, b) => a.localeCompare(b, 'fr', { sensitivity: 'base' }));
+    const selected = new Set();
+    const listEl = document.getElementById('species-list');
+    const searchEl = document.getElementById('species-search');
+    const clearEl = document.getElementById('search-clear');
+    const countEl = document.getElementById('set-count');
+    const totalEl = document.getElementById('set-total');
+    const addBtn = document.getElementById('set-add-btn');
+    const msgEl = document.getElementById('detail-msg');
+
+    function norm(str){
+      return (str || '').toString().toLowerCase().replace(/[’‘]/g, "'").normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function renderList(){
+      const q = norm(searchEl.value.trim());
+      listEl.innerHTML = '';
+      const shown = allSpecies.filter(n => !q || norm(n).includes(q));
+      if(shown.length === 0){
+        const empty = document.createElement('div');
+        empty.className = 'species-empty';
+        empty.textContent = allSpecies.length === 0 ? 'Aucune espèce disponible pour le moment.' : 'Aucune espèce ne correspond à cette recherche.';
+        listEl.appendChild(empty);
+        return;
+      }
+      shown.forEach(name => {
+        const row = document.createElement('label');
+        row.className = 'species-item';
+        const box = document.createElement('input');
+        box.type = 'checkbox';
+        box.checked = selected.has(name);
+        box.addEventListener('change', () => {
+          if(box.checked) selected.add(name); else selected.delete(name);
+          updateSummary();
+        });
+        const txt = document.createElement('span');
+        txt.textContent = name;
+        row.appendChild(box);
+        row.appendChild(txt);
+        listEl.appendChild(row);
+      });
+    }
+
+    function updateSummary(){
+      const n = selected.size;
+      countEl.textContent = n === 0
+        ? 'Aucune illustration choisie'
+        : n + (n > 1 ? ' illustrations' : ' illustration') + ' × ' + fmtPrice(cfg.unitPrice);
+      totalEl.textContent = fmtPrice(customSetTotal(product, n));
+      addBtn.disabled = n === 0;
+    }
+
+    searchEl.addEventListener('input', () => {
+      clearEl.style.display = searchEl.value ? 'block' : 'none';
+      renderList();
+    });
+    clearEl.addEventListener('click', () => {
+      searchEl.value = '';
+      clearEl.style.display = 'none';
+      renderList();
+      searchEl.focus();
+    });
+
+    addBtn.addEventListener('click', () => {
+      if(selected.size === 0) return;
+      const paperId = document.querySelector('input[name="set-paper"]:checked').value;
+      const paper = cfg.papers.find(p => p.id === paperId);
+      const n = selected.size;
+      const uid = addCustomSet(product.id, paperId, Array.from(selected));
+      if(!uid) return;
+      msgEl.innerHTML = 'Set de ' + n + (n > 1 ? ' illustrations' : ' illustration') + ' (' + paper.label + ') ajouté à votre sélection. <a href="commande.html" style="color:var(--brique); font-weight:600;">Voir ma sélection</a>';
+      msgEl.className = 'detail-msg success';
+      selected.clear();
+      searchEl.value = '';
+      clearEl.style.display = 'none';
+      renderList();
+      updateSummary();
+    });
+
+    renderList();
+    updateSummary();
   }
 
   // longDesc peut être une simple chaîne (un paragraphe) ou un tableau de blocs
@@ -171,9 +260,37 @@
     ? 'Cet article est temporairement en rupture de stock. Revenez bientôt !'
     : 'Cet article arrive prochainement. Revenez bientôt, ou suivez nos réseaux pour être prévenu·e de sa sortie.';
 
+  // Set personnalisable : choix du papier + espèces à cocher, à la place du sélecteur de quantité.
+  const setBuilderBlock = (product.customSet && product.available !== false)
+    ? `
+        <div class="set-builder">
+          <span class="label">1. Papier</span>
+          ${product.customSet.papers.map((paper, i) => `
+          <label class="ship-option">
+            <input type="radio" name="set-paper" value="${paper.id}"${i === 0 ? ' checked' : ''}>
+            <span class="ship-info"><span class="ship-name">${paper.label}</span></span>
+          </label>`).join('')}
+          <span class="label">2. Vos espèces</span>
+          <div class="search-bar">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><line x1="21" y1="21" x2="16.2" y2="16.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <input type="text" id="species-search" placeholder="Rechercher une espèce…" autocomplete="off">
+            <button type="button" id="search-clear" aria-label="Effacer la recherche" style="display:none;">✕</button>
+          </div>
+          <div class="species-list" id="species-list"></div>
+          <div class="set-summary" aria-live="polite">
+            <span class="set-count" id="set-count">Aucune illustration choisie</span>
+            <span class="set-total" id="set-total">0,00 €</span>
+          </div>
+          <div class="detail-actions">
+            <button type="button" class="btn btn-primary" id="set-add-btn" disabled>Ajouter à ma sélection</button>
+          </div>
+          <div class="detail-msg" id="detail-msg"></div>
+        </div>`
+    : '';
+
   const actionsBlock = product.available === false
     ? `<div class="detail-msg" style="display:block; margin-top:4px; color:var(--ink-soft);">${unavailMessage}</div>`
-    : `
+    : product.customSet ? setBuilderBlock : `
         <div class="detail-actions">
           <div class="qty">
             <button type="button" id="detail-qty-dec" aria-label="Diminuer">–</button>
@@ -226,7 +343,7 @@
         </div>
         <h1>${product.name}</h1>
         ${speciesLine}
-        <div class="price">${fmtPrice(product.price)}</div>
+        <div class="price">${product.priceLabel || fmtPrice(product.price)}</div>
         ${crossSellNote}
         ${actionsBlock}
         ${renderLongDesc(product.longDesc)}
@@ -254,6 +371,11 @@
   }
 
   if(product.available === false) return;
+
+  if(product.customSet){
+    initSetBuilder(product);
+    return;
+  }
 
   const qtyInput = document.getElementById('detail-qty-input');
   document.getElementById('detail-qty-dec').addEventListener('click', () => {

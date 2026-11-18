@@ -16,6 +16,10 @@
    - availabilityLabel : (optionnel, avec available: false) texte personnalisé affiché à la
      place de "Arrive prochainement" — utile par exemple pour une rupture de stock ponctuelle
      sur un article déjà commercialisé : availabilityLabel: "Rupture de stock".
+   - priceLabel : (optionnel) texte affiché à la place du prix, ex. "0,18 € l'illustration".
+   - customSet : (optionnel) transforme l'article en « set personnalisable » : le client coche des
+     espèces (liste dans species.js) et choisit un papier ; le prix = nombre d'espèces × unitPrice.
+     Voir l'article icoo0 ci-dessous.
    - speciesCount : (optionnel, carnets d'observation) nombre d'espèces présentées.
    - shortDesc : une phrase courte pour la vignette du catalogue.
    - longDesc : la description complète de la fiche produit. Peut être :
@@ -472,6 +476,37 @@ const PRODUCTS = [
     ],
     icon: "pencil",
     relatedTo: ["coo6"]
+  },
+  {
+    id: "icoo0",
+    ref: "ICOO0",
+    name: "Set d'illustrations à colorier personnalisable – Oiseaux",
+    category: "colorier",
+    theme: "oiseaux",
+    price: 0.18,
+    priceLabel: "0,18 € l'illustration",
+    available: true,
+    customSet: {
+      unitPrice: 0.18,
+      papers: [
+        { id: "simple", label: "A4 simple" },
+        { id: "autocollant", label: "A4 autocollant" }
+      ],
+      speciesList: "oiseaux",            // clé de la liste dans species.js
+      weightPerIllustration: 1.6        // grammes, estimation (basée sur les lots tout prêts) : sert au calcul des frais de port
+    },
+    shortDesc: "Composez votre propre set : cochez les oiseaux que vous souhaitez colorier, seules les illustrations choisies sont imprimées.",
+    longDesc: [
+      "Ce set se compose à votre goût : parmi toutes les espèces disponibles, cochez celles que vous souhaitez colorier. Seules les illustrations choisies sont imprimées, avec un guide de correspondance pour retrouver chaque oiseau.",
+      "Une fois coloriées, les illustrations peuvent être replacées sur la page de l'espèce correspondante dans vos carnets d'observation, ou servir pour toute autre création.",
+      "Le prix est de 0,18 € l'illustration, au même tarif sur papier A4 simple ou A4 autocollant."
+    ],
+    specs: [
+      ["Prix", "0,18 € l'illustration"],
+      ["Papier au choix", "A4 simple ou A4 autocollant"],
+      ["Contenu", "les espèces de votre choix"]
+    ],
+    icon: "pencil"
   },
   {
     id: "auo1",
